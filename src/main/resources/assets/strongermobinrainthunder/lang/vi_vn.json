@@ -1,0 +1,10 @@
+{
+  "gamerule.bonusExperience.description": "Thêm kinh nghiệm n?u người chơi giết mob được buff",
+  "gamerule.bonusExperience": "Kinh nghiệm cộng thêm khi mob được buff chết",
+  "gamerule.dropGears.description": "Rơi Trang bị của mob được buff Khi người chơi giết nó",
+  "gamerule.dropGears": "Rơi Trang bị của mob được buff Khi người chơi giết nó",
+  "gamerule.bonusMobLoot": "Nhận thêm loot từ mob được buff",
+  "gamerule.bonusMobLoot.description": "Khi người chơi tiêu diệt mob được buff, nhận thêm loot từ mob được buff (chỉ áp dụng khi người chơi giết mob)",
+  "gamerule.allowSleepInRainAndThunder": "Cho phép ngủ khi trời mưa hoặc giông sét",
+  "gamerule.allowSleepInRainAndThunder.description": "Cho phép/Ngăn ngủ khi trời mưa hoặc giông sét"
+}

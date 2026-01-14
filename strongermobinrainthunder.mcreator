@@ -1,0 +1,437 @@
+{
+  "mod_elements": [
+    {
+      "name": "MobSpawnBuff",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "mob_spawn_buff",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/strongermobinrainthunder/procedures/MobSpawnBuffProcedure.java"
+        ]
+      }
+    },
+    {
+      "name": "GiveBadEffect",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "give_bad_effect",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "sourceentity",
+            "type": "entity"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/strongermobinrainthunder/procedures/GiveBadEffectProcedure.java"
+        ]
+      }
+    },
+    {
+      "name": "ThrowProjectile",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "throw_projectile",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/strongermobinrainthunder/procedures/ThrowProjectileProcedure.java"
+        ]
+      }
+    },
+    {
+      "name": "NoGolemCheat",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "no_golem_cheat",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "sourceentity",
+            "type": "entity"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/strongermobinrainthunder/procedures/NoGolemCheatProcedure.java"
+        ]
+      }
+    },
+    {
+      "name": "NoThreeBlockCheat",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "no_three_block_cheat",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "sourceentity",
+            "type": "entity"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/strongermobinrainthunder/procedures/NoThreeBlockCheatProcedure.java"
+        ]
+      }
+    },
+    {
+      "name": "ThunderAndRainCheck",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "thunder_and_rain_check",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "return_type": "logic",
+        "files": [
+          "src/main/java/net/mcreator/strongermobinrainthunder/procedures/ThunderAndRainCheckProcedure.java"
+        ]
+      }
+    },
+    {
+      "name": "IncreaseChanceForRain",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "increase_chance_for_rain",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/strongermobinrainthunder/procedures/IncreaseChanceForRainProcedure.java"
+        ]
+      }
+    },
+    {
+      "name": "BonusExperience",
+      "type": "gamerule",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "bonus_experience",
+      "metadata": {
+        "type": "number",
+        "files": []
+      }
+    },
+    {
+      "name": "DropGears",
+      "type": "gamerule",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "drop_gears",
+      "metadata": {
+        "type": "logic",
+        "files": []
+      }
+    },
+    {
+      "name": "BonusMobLoot",
+      "type": "gamerule",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "bonus_mob_loot",
+      "metadata": {
+        "type": "logic",
+        "files": []
+      }
+    },
+    {
+      "name": "BonusDrop",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "bonus_drop",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "sourceentity",
+            "type": "entity"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/strongermobinrainthunder/procedures/BonusDropProcedure.java"
+        ]
+      }
+    },
+    {
+      "name": "SleepNoAllow",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "sleep_no_allow",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "blockstate",
+            "type": "blockstate"
+          },
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/strongermobinrainthunder/procedures/SleepNoAllowProcedure.java"
+        ]
+      }
+    },
+    {
+      "name": "AllowSleepInRainAndThunder",
+      "type": "gamerule",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "allow_sleep_in_rain_and_thunder",
+      "metadata": {
+        "type": "logic",
+        "files": []
+      }
+    }
+  ],
+  "variable_elements": [
+    {
+      "name": "rolled",
+      "type": "logic",
+      "scope": "map",
+      "value": "false"
+    }
+  ],
+  "sound_elements": [],
+  "tag_elements": {
+    "ENTITIES:minecraft:zombie_buff": [
+      "EntityZombie",
+      "EntityZombieVillager",
+      "EntityHusk"
+    ],
+    "ENTITIES:minecraft:skeleton_buff": [
+      "EntitySkeleton",
+      "EntityStray"
+    ],
+    "ENTITIES:minecraft:creeper_buff": [
+      "EntityCreeper"
+    ],
+    "ENTITIES:minecraft:pillager_buff": [
+      "EntityPillager"
+    ],
+    "ENTITIES:minecraft:vindicator_buff": [
+      "EntityVindicator"
+    ],
+    "ENTITIES:minecraft:killer_bunny_summon_with": [
+      "EntityHusk"
+    ],
+    "ITEMS:minecraft:effect_from_item": [
+      "Items.IRON_SHOVEL",
+      "Blocks.WEB",
+      "Items.FIRE_CHARGE",
+      "Blocks.SKULL#1",
+      "Items.SNOWBALL",
+      "Items.TOTEM_OF_UNDYING",
+      "Items.SPIDER_EYE"
+    ],
+    "ENTITIES:minecraft:iron_golem_detect": [
+      "EntityIronGolem"
+    ],
+    "ENTITIES:minecraft:three_block_block": [
+      "#minecraft:zombie_buff",
+      "#minecraft:pillager_buff",
+      "#minecraft:vindicator_buff",
+      "#minecraft:creeper_buff",
+      "#minecraft:skeleton_buff"
+    ],
+    "BLOCKS:minecraft:bed_prevent": [
+      "Blocks.ORANGE_BED",
+      "Blocks.MAGENTA_BED",
+      "Blocks.LIGHT_BLUE_BED",
+      "Blocks.YELLOW_BED",
+      "Blocks.LIME_BED",
+      "Blocks.PINK_BED",
+      "Blocks.GRAY_BED",
+      "Blocks.LIGHT_GRAY_BED",
+      "Blocks.CYAN_BED",
+      "Blocks.PURPLE_BED",
+      "Blocks.BLUE_BED",
+      "Blocks.BROWN_BED",
+      "Blocks.GREEN_BED",
+      "Blocks.RED_BED",
+      "Blocks.BLACK_BED"
+    ],
+    "ENTITIES:minecraft:able_to_buff": [
+      "#minecraft:zombie_buff",
+      "#minecraft:skeleton_buff",
+      "EntityDrowned"
+    ]
+  },
+  "tab_element_order": {},
+  "language_map": {
+    "en_us": {
+      "gamerule.bonusExperience.description": "Drop More Experience if the player kills the buffed mob",
+      "gamerule.bonusExperience": "Bonus Experience when buffed mob dies",
+      "gamerule.dropGears.description": "Drop Buffed Mob\u0027s Gears When player kills it ",
+      "gamerule.dropGears": "Buffed Mob\u0027s Gears Drop",
+      "gamerule.bonusMobLoot": "Get Bonus Loot from Buffed Mob",
+      "gamerule.bonusMobLoot.description": "When Player kill buffed Mob, Player can receive extra loot",
+      "gamerule.allowSleepInRainAndThunder": "Allow Sleeping in Raining and Thundering Weather",
+      "gamerule.allowSleepInRainAndThunder.description": "Allow/Prevent Sleeping in Raining and Thundering Weather"
+    },
+    "vi_vn": {
+      "gamerule.bonusExperience.description": "Thêm kinh nghiệm n?u người chơi giết mob được buff",
+      "gamerule.bonusExperience": "Kinh nghiệm cộng thêm khi mob được buff chết",
+      "gamerule.dropGears.description": "Rơi Trang bị của mob được buff Khi người chơi giết nó",
+      "gamerule.dropGears": "Rơi Trang bị của mob được buff Khi người chơi giết nó",
+      "gamerule.bonusMobLoot": "Nhận thêm loot từ mob được buff",
+      "gamerule.bonusMobLoot.description": "Khi người chơi tiêu diệt mob được buff, nhận thêm loot từ mob được buff (chỉ áp dụng khi người chơi giết mob)",
+      "gamerule.allowSleepInRainAndThunder": "Cho phép ngủ khi trời mưa hoặc giông sét",
+      "gamerule.allowSleepInRainAndThunder.description": "Cho phép/Ngăn ngủ khi trời mưa hoặc giông sét"
+    },
+    "en_au": {
+      "gamerule.bonusExperience.description": "Drop More Experience if the player kills the buffed mob",
+      "gamerule.bonusExperience": "Bonus Experience when buffed mob dies",
+      "gamerule.dropGears.description": "Drop Buffed Mob\u0027s Gears When player kills it ",
+      "gamerule.dropGears": "Buffed Mob\u0027s Gears Drop",
+      "gamerule.bonusMobLoot": "Get Bonus Loot from Buffed Mob",
+      "gamerule.bonusMobLoot.description": "When Player kill buffed Mob, Player can receive extra loot",
+      "gamerule.allowSleepInRainAndThunder": "Allow Sleeping in Raining and Thundering Weather",
+      "gamerule.allowSleepInRainAndThunder.description": "Allow/Prevent Sleeping in Raining and Thundering Weather"
+    }
+  },
+  "metadata": {
+    "files": [
+      "src/main/java/net/mcreator/strongermobinrainthunder/init/StrongermobinrainthunderModGameRules.java",
+      "src/main/java/net/mcreator/strongermobinrainthunder/StrongermobinrainthunderMod.java",
+      "src/main/resources/pack.mcmeta",
+      "src/main/resources/META-INF/mods.toml",
+      "src/main/java/net/mcreator/strongermobinrainthunder/network/StrongermobinrainthunderModVariables.java"
+    ]
+  },
+  "foldersRoot": {
+    "name": "~",
+    "children": []
+  },
+  "workspaceSettings": {
+    "modid": "strongermobinrainthunder",
+    "modName": "StrongerMobInRain\u0026Thunder",
+    "version": "0.0.2",
+    "description": "Make Mob Stronger In Rain and Thunder Weather",
+    "author": "MCreator",
+    "websiteURL": "https://mcreator.net",
+    "license": "MIT License",
+    "serverSideOnly": false,
+    "modPicture": "bec0d12ab9cb88c",
+    "requiredMods": [],
+    "dependencies": [],
+    "dependants": [],
+    "mcreatorDependencies": [],
+    "currentGenerator": "forge-1.20.1",
+    "credits": "Created using mod maker MCreator - https://mcreator.net/about",
+    "modElementsPackage": "net.mcreator.strongermobinrainthunder"
+  },
+  "mcreatorVersion": 202500345720
+}

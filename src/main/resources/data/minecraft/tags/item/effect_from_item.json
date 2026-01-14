@@ -1,0 +1,12 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:cobweb",
+    "minecraft:wither_skeleton_skull",
+    "minecraft:totem_of_undying",
+    "minecraft:spider_eye",
+    "minecraft:iron_shovel",
+    "minecraft:snowball",
+    "minecraft:fire_charge"
+  ]
+}

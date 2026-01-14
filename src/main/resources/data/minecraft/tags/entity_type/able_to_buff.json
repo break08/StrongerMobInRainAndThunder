@@ -1,0 +1,13 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "#minecraft:skeleton_buff",
+      "required": false
+    },
+    {
+      "id": "#minecraft:zombie_buff",
+      "required": false
+    }
+  ]
+}

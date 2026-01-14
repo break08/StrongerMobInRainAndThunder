@@ -1,0 +1,12 @@
+{
+  "_fv": 79,
+  "_type": "gamerule",
+  "definition": {
+    "type": "Number",
+    "displayName": "Bonus Experience when buffed mob dies",
+    "description": "Drop More Experience if the player kills the buffed mob",
+    "category": "DROPS",
+    "defaultValueLogic": false,
+    "defaultValueNumber": 7
+  }
+}

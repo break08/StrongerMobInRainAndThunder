@@ -1,0 +1,29 @@
+modLoader="javafml"
+loaderVersion="[47,)"
+license="MIT License"
+
+[[mods]]
+modId="strongermobinrainthunder"
+version="0.0.2"
+displayName="StrongerMobInRain&Thunder"
+displayURL="https://mcreator.net"
+logoFile="logo.png"
+credits="Created using mod maker MCreator - https://mcreator.net/about"
+authors="MCreator"
+description="Make Mob Stronger In Rain and Thunder Weather"
+
+# Start of user code block mod configuration
+# End of user code block mod configuration
+
+[[dependencies.strongermobinrainthunder]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.20.1]"
+    ordering="AFTER"
+    side="BOTH"
+
+
+
+
+# Start of user code block dependencies configuration
+# End of user code block dependencies configuration

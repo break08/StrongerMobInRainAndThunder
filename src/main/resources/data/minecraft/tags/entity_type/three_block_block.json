@@ -1,0 +1,25 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "#minecraft:creeper_buff",
+      "required": false
+    },
+    {
+      "id": "#minecraft:skeleton_buff",
+      "required": false
+    },
+    {
+      "id": "#minecraft:zombie_buff",
+      "required": false
+    },
+    {
+      "id": "#minecraft:vindicator_buff",
+      "required": false
+    },
+    {
+      "id": "#minecraft:pillager_buff",
+      "required": false
+    }
+  ]
+}

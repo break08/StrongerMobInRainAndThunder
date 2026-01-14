@@ -1,0 +1,10 @@
+{
+  "gamerule.bonusExperience.description": "Drop More Experience if the player kills the buffed mob",
+  "gamerule.bonusExperience": "Bonus Experience when buffed mob dies",
+  "gamerule.dropGears.description": "Drop Buffed Mob\u0027s Gears When player kills it ",
+  "gamerule.dropGears": "Buffed Mob\u0027s Gears Drop",
+  "gamerule.bonusMobLoot": "Get Bonus Loot from Buffed Mob",
+  "gamerule.bonusMobLoot.description": "When Player kill buffed Mob, Player can receive extra loot",
+  "gamerule.allowSleepInRainAndThunder": "Allow Sleeping in Raining and Thundering Weather",
+  "gamerule.allowSleepInRainAndThunder.description": "Allow/Prevent Sleeping in Raining and Thundering Weather"
+}
