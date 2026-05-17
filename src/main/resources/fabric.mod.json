@@ -1,0 +1,37 @@
+{
+	"schemaVersion": 1,
+	"id": "the_rise_of_hostile",
+	"version": "${version}",
+	"name": "The Rise of Hostile",
+	"description": "This is an example description! Tell everyone what your mod is about!",
+	"authors": [
+		"break08"
+	],
+	"contact": {
+		"homepage": "https://fabricmc.net/",
+		"sources": "https://github.com/FabricMC/fabric-example-mod"
+	},
+	"license": "CC0-1.0",
+	"icon": "assets/the_rise_of_hostile/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"com.strongmonster.TheRiseOfHostile",
+			"com.strongmonster.game_rule.TheRiseOfHostileGameRule",
+			"com.strongmonster.effect.CurseOfUndeadRegister"
+
+		]
+	},
+	"fabric-datagen": [
+		"com.strongmonster.datagen.TheRiseOfHostileDataGenerator"
+	],
+	"mixins": [
+		"the_rise_of_hostile.mixin.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.19.2",
+		"minecraft": "~1.21.11",
+		"java": ">=21",
+		"fabric-api": "*"
+	}
+}
