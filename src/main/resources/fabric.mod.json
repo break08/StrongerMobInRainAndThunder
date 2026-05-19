@@ -20,6 +20,9 @@
 			"com.strongmonster.game_rule.TheRiseOfHostileGameRule",
 			"com.strongmonster.effect.CurseOfUndeadRegister"
 
+		],
+		"client": [
+			"com.strongmonster.client.TheRiseOfHostileClient"
 		]
 	},
 	"fabric-datagen": [

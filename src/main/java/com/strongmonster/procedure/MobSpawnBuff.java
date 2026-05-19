@@ -7,6 +7,7 @@ import com.strongmonster.mixin.KillerBunnyMixin;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerEntityEvents;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
@@ -78,14 +79,35 @@ public class MobSpawnBuff {
                 }
                 ScoreAccess score_special_buff = scoreboardbuff.getOrCreatePlayerScore(ScoreHolder.forNameOnly(entity.getScoreboardName()), objective_special);
 
+
                 if (entity.getType().is(TheRiseOfHostileEntityTag.ZOMBIE_BUFF)) {
                     if (Math.random() < 0.85) {
+                        int value =
+                                Mth.nextInt(
+                                        level.random,
+                                        1,
+                                        6
+                                );
                         if (isThunder) {
                             score_buff.set(1);
-                            if (Math.random() < 0.9) {
-                                main_hand = new ItemStack(Items.DIAMOND_SWORD);
-                            } else {
-                                main_hand = new ItemStack(Items.NETHERITE_SWORD);
+                            if (value == 1 || value == 2) {
+                                if (Math.random() < 0.9) {
+                                    main_hand = new ItemStack(Items.DIAMOND_SWORD);
+                                } else {
+                                    main_hand = new ItemStack(Items.NETHERITE_SWORD);
+                                }
+                            } else if (value == 3 || value == 4) {
+                                if (Math.random() < 0.9) {
+                                    main_hand = new ItemStack(Items.DIAMOND_AXE);
+                                } else {
+                                    main_hand = new ItemStack(Items.NETHERITE_AXE);
+                                }
+                            } else if (value == 5 || value == 6) {
+                                if (Math.random() < 0.9) {
+                                    main_hand = new ItemStack(Items.DIAMOND_SPEAR);
+                                } else {
+                                    main_hand = new ItemStack(Items.NETHERITE_SPEAR);
+                                }
                             }
                             main_hand.enchant(
                                     level.registryAccess()
@@ -120,10 +142,24 @@ public class MobSpawnBuff {
                                 }
                             }
                         } else {
-                            if (Math.random() < 0.9){
-                                main_hand = new ItemStack(Items.IRON_SWORD);
-                            } else {
-                                main_hand = new ItemStack(Items.DIAMOND_SWORD);
+                            if (value == 1 || value == 2 || value == 3) {
+                                if (Math.random() < 0.75) {
+                                    main_hand = new ItemStack(Items.IRON_SWORD);
+                                } else {
+                                    main_hand = new ItemStack(Items.DIAMOND_SWORD);
+                                }
+                            } else if (value == 4 || value == 5) {
+                                if (Math.random() < 0.75) {
+                                    main_hand = new ItemStack(Items.IRON_AXE);
+                                } else {
+                                    main_hand = new ItemStack(Items.DIAMOND_AXE);
+                                }
+                            } else if (value == 6) {
+                                if (Math.random() < 0.75) {
+                                    main_hand = new ItemStack(Items.IRON_SPEAR);
+                                } else {
+                                    main_hand = new ItemStack(Items.DIAMOND_SPEAR);
+                                }
                             }
                             main_hand.enchant(
                                     level.registryAccess()
@@ -142,6 +178,7 @@ public class MobSpawnBuff {
                         }
                     } else {
                         score_special_buff.set(1);
+                        SpecialBuff.run(entity, level);
                     }
                 } else if (entity.getType().is(TheRiseOfHostileEntityTag.SKELETON_BUFF)) {
                     if (Math.random() < 0.85) {
@@ -192,6 +229,7 @@ public class MobSpawnBuff {
                         }
                     } else {
                         score_special_buff.set(1);
+                        SpecialBuff.run(entity, level);
                     }
                 } else if (entity instanceof Creeper creeper && isThunder && Math.random() < 0.5) {
                     score_buff.set(1);

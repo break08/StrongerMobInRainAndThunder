@@ -19,6 +19,9 @@ public class TheRiseOfHostileEntityTag extends FabricTagProvider.EntityTypeTagPr
 
     public static final TagKey<EntityType<?>> IS_GOLEM = TagKey.create(Registries.ENTITY_TYPE, Identifier.fromNamespaceAndPath(TheRiseOfHostile.MOD_ID, "is_golem"));
 
+    public static final TagKey<EntityType<?>> ARMOR_EQUIP_BUFF = TagKey.create(Registries.ENTITY_TYPE, Identifier.fromNamespaceAndPath(TheRiseOfHostile.MOD_ID, "armor_buff"));
+
+
     public TheRiseOfHostileEntityTag(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
         super(output, registriesFuture);
     }
@@ -36,5 +39,9 @@ public class TheRiseOfHostileEntityTag extends FabricTagProvider.EntityTypeTagPr
         valueLookupBuilder(IS_GOLEM)
                 .add(EntityType.IRON_GOLEM)
                 .add(EntityType.SNOW_GOLEM);
+        valueLookupBuilder(ARMOR_EQUIP_BUFF)
+                .addTag(SKELETON_BUFF)s
+                .addTag(ZOMBIE_BUFF)
+                .add(EntityType.DROWNED);
     }
 }

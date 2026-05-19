@@ -18,6 +18,8 @@ public class TheRiseOfHostileItemTag extends FabricTagProvider.ItemTagProvider{
 
     public static final TagKey<Item> IS_THROWABLE = TagKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(TheRiseOfHostile.MOD_ID, "is_throwable"));
 
+    public static final TagKey<Item> GIVE_TARGET_EFFECT = TagKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(TheRiseOfHostile.MOD_ID, "give_target_effect"));
+
     public TheRiseOfHostileItemTag(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
         super(output, registriesFuture);
     }
@@ -37,5 +39,10 @@ public class TheRiseOfHostileItemTag extends FabricTagProvider.ItemTagProvider{
                 .add(Items.DRAGON_BREATH)
                 .add(Items.WIND_CHARGE)
                 .add(Items.WITHER_SKELETON_SKULL);
+        valueLookupBuilder(GIVE_TARGET_EFFECT)
+                .add(Items.IRON_SHOVEL)
+                .add(Items.SPIDER_EYE)
+                .add(Items.COBWEB);
+
     }
 }

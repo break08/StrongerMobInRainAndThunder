@@ -1,5 +1,6 @@
 package com.strongmonster.procedure;
 
+import com.strongmonster.head_lib.CustomGetScoreboard;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 
@@ -15,21 +16,10 @@ public class EffectBuff {
     public static void run(Level level, Entity entity) {
         if (entity == null)
             return;
-        Scoreboard scoreboard = level.getScoreboard();
-
-        Objective objective = scoreboard.getObjective("special_buff");
 
         boolean isRain = entity.level().isRaining();
 
-        int isSpecialBuffed =
-                scoreboard
-                        .getOrCreatePlayerScore(
-                                entity,
-                                objective
-                        )
-                        .get();
-
-        if (!(isSpecialBuffed == 1)){
+        if (!(CustomGetScoreboard.getScoreBoard(entity, "special_buff") == 1)){
             if (isRain){
                 if (entity instanceof LivingEntity livingEntity && !livingEntity.level().isClientSide()){
                     livingEntity.addEffect(new MobEffectInstance(MobEffects.STRENGTH, 28800, Mth.nextInt(RandomSource.create(), 2, 3)));

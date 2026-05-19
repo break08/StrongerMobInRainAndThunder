@@ -34,11 +34,22 @@ public class ZombieRangedAttack {
                         )
                         .get();
 
+        Objective cooldown_obj = scoreboard.getObjective("cool");
+
+        int getCooldown =
+                scoreboard
+                        .getOrCreatePlayerScore(
+                                entity,
+                                cooldown_obj
+                        )
+                        .get();
+
         if (!(entity.getTarget() == null)
                 && entity.getOffhandItem().is(TheRiseOfHostileItemTag.IS_THROWABLE)
                 && entity instanceof LivingEntity livingEntity
                 && !livingEntity.level().isClientSide()
                 && isSpecialBuffed == 1
+                && getCooldown == 0
         ) {
             for (int i = 0; i < 5; i++) {
                 if (entity.getOffhandItem().equals(new ItemStack(Items.FIRE_CHARGE))) {
@@ -60,6 +71,19 @@ public class ZombieRangedAttack {
                     livingEntity.level().addFreshEntity(projectile);
                 }
             }
+            scoreboard
+                    .getOrCreatePlayerScore(
+                            entity,
+                            cooldown_obj
+                    )
+                    .set(20);
+        } else if (!(getCooldown == 0) && isSpecialBuffed == 1 && entity instanceof LivingEntity livingEntity && !livingEntity.level().isClientSide() && entity.getOffhandItem().is(TheRiseOfHostileItemTag.IS_THROWABLE)) {
+            scoreboard
+                    .getOrCreatePlayerScore(
+                            entity,
+                            cooldown_obj
+                    )
+                    .set(getCooldown - 1);
         }
     }
 }

@@ -25,7 +25,7 @@ public class IllagerBuff {
 
             ItemStack main_hand = ItemStack.EMPTY;
             if (entity instanceof LivingEntity living_entity) {
-                if (living_entity instanceof Pillager && living_entity.getMainHandItem() == ItemStack.EMPTY) {
+                if (living_entity instanceof Pillager && !(living_entity.getMainHandItem().isEmpty())) {
                     if (isRain) {
                         living_entity.getMainHandItem().enchant(
                                 level.registryAccess()
