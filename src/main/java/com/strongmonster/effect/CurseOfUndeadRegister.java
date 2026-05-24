@@ -10,7 +10,7 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.world.effect.MobEffect;
 
 public class CurseOfUndeadRegister implements ModInitializer {
-    public static final Holder<MobEffect> TATER = Registry.registerForHolder(BuiltInRegistries.MOB_EFFECT, Identifier.fromNamespaceAndPath(TheRiseOfHostile.MOD_ID, "curse_of_undead"), new CurseOfUndead());
+    public static final Holder<MobEffect> CURSE_OF_UNDEAD = Registry.registerForHolder(BuiltInRegistries.MOB_EFFECT, Identifier.fromNamespaceAndPath(TheRiseOfHostile.MOD_ID, "curse_of_undead"), new CurseOfUndead());
     @Override
     public void onInitialize(){
 

@@ -23,6 +23,9 @@
 		],
 		"client": [
 			"com.strongmonster.client.TheRiseOfHostileClient"
+		],
+		"modmenu": [
+			"com.strongmonster.client.config.AddToModMenu"
 		]
 	},
 	"fabric-datagen": [

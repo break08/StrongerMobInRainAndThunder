@@ -16,7 +16,7 @@ import net.minecraft.world.entity.player.Player;
 
 public class CurseOfUndead extends MobEffect {
     protected CurseOfUndead() {
-        super(MobEffectCategory.BENEFICIAL, 0xe9b8b3);
+        super(MobEffectCategory.HARMFUL, 0xe9b8b3);
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.strongmonster.procedure;
 
 import com.strongmonster.datagen.TheRiseOfHostileEntityTag;
+import com.strongmonster.game_rule.TheRiseOfHostileGameRule;
 import com.strongmonster.mixin.CreeperMixin;
 import com.strongmonster.mixin.KillerBunnyMixin;
 
@@ -9,9 +10,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.entity.EntitySpawnReason;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.animal.rabbit.Rabbit;
 import net.minecraft.world.entity.monster.Creeper;
 import net.minecraft.world.entity.monster.zombie.Drowned;
@@ -37,6 +36,11 @@ public class MobSpawnBuff {
 
     private static void onEntitySpawn() {
         ServerEntityEvents.ENTITY_LOAD.register((entity, world) -> {
+            // DROP MANAGEMENT
+            boolean allDrop = world.getGameRules().get(TheRiseOfHostileGameRule.ALL_DIAMOND_GEAR_DROP_GAMERULE);
+            float mainhand_drop = 0.085f;
+
+            // ENTITY LEVEL
             Level level = entity.level();
             // Weather check
             boolean isRain = level.isRaining();
@@ -81,7 +85,7 @@ public class MobSpawnBuff {
 
 
                 if (entity.getType().is(TheRiseOfHostileEntityTag.ZOMBIE_BUFF)) {
-                    if (Math.random() < 0.85) {
+                    if (Math.random() < 0.65) {
                         int value =
                                 Mth.nextInt(
                                         level.random,
@@ -102,13 +106,19 @@ public class MobSpawnBuff {
                                 } else {
                                     main_hand = new ItemStack(Items.NETHERITE_AXE);
                                 }
-                            } else if (value == 5 || value == 6) {
+                            } else {
                                 if (Math.random() < 0.9) {
                                     main_hand = new ItemStack(Items.DIAMOND_SPEAR);
                                 } else {
                                     main_hand = new ItemStack(Items.NETHERITE_SPEAR);
                                 }
                             }
+
+                            if ((main_hand.is(Items.NETHERITE_SWORD) || main_hand.is(Items.NETHERITE_AXE) || main_hand.is(Items.NETHERITE_SPEAR))
+                                    || (!allDrop && (main_hand.is(Items.DIAMOND_SWORD) || main_hand.is(Items.DIAMOND_AXE) || main_hand.is(Items.DIAMOND_SPEAR)))) {
+                                mainhand_drop = -1.0f;
+                            }
+
                             main_hand.enchant(
                                     level.registryAccess()
                                             .lookupOrThrow(Registries.ENCHANTMENT)
@@ -161,6 +171,10 @@ public class MobSpawnBuff {
                                     main_hand = new ItemStack(Items.DIAMOND_SPEAR);
                                 }
                             }
+                            if (!allDrop && (main_hand.is(Items.DIAMOND_SWORD) || main_hand.is(Items.DIAMOND_AXE) || main_hand.is(Items.DIAMOND_SPEAR))) {
+                                mainhand_drop = -1.0f;
+                            }
+
                             main_hand.enchant(
                                     level.registryAccess()
                                             .lookupOrThrow(Registries.ENCHANTMENT)
@@ -206,6 +220,8 @@ public class MobSpawnBuff {
                                     2
                             );
 
+                            mainhand_drop = -1.0f;
+
                         } else {
                             main_hand.enchant(
                                     level.registryAccess()
@@ -241,6 +257,10 @@ public class MobSpawnBuff {
                     score_buff.set(1);
                 }
                 EffectBuff.run(level, entity);
+                ArmorEquipInRainWeather.ArmorEquipSpecialCase(entity);
+                if (entity instanceof Mob mob) {
+                    mob.setDropChance(EquipmentSlot.MAINHAND, mainhand_drop);
+                }
             }
         });
     }

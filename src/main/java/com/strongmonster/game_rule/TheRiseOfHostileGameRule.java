@@ -19,6 +19,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.ExperienceOrb;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.monster.Creeper;
 import net.minecraft.world.entity.monster.illager.Evoker;
@@ -31,6 +32,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.gamerules.GameRule;
 import net.minecraft.world.level.gamerules.GameRuleCategory;
 import net.minecraft.world.level.storage.LevelData;
+import net.minecraft.world.phys.Vec3;
 
 public class TheRiseOfHostileGameRule implements ModInitializer {
     public static final GameRule<Boolean> ALLOW_SLEEP_GAMERULE = GameRuleBuilder
@@ -41,7 +43,18 @@ public class TheRiseOfHostileGameRule implements ModInitializer {
     public static final GameRule<Boolean> BONUS_DROP_GAMERULE = GameRuleBuilder
             .forBoolean(true)
             .category(GameRuleCategory.DROPS)
-            .buildAndRegister(Identifier.fromNamespaceAndPath(TheRiseOfHostile.MOD_ID, "gear_drop"));
+            .buildAndRegister(Identifier.fromNamespaceAndPath(TheRiseOfHostile.MOD_ID, "bonus_drop"));
+
+    public static final GameRule<Boolean> ALL_DIAMOND_GEAR_DROP_GAMERULE = GameRuleBuilder
+            .forBoolean(false)
+            .category(GameRuleCategory.DROPS)
+            .buildAndRegister(Identifier.fromNamespaceAndPath(TheRiseOfHostile.MOD_ID, "all_diamond_gear_drop"));
+    public static final GameRule<Boolean> BONUS_EXP = GameRuleBuilder
+            .forBoolean(false)
+            .category(GameRuleCategory.DROPS)
+            .buildAndRegister(Identifier.fromNamespaceAndPath(TheRiseOfHostile.MOD_ID, "bonus_exp"));
+
+
 
     private static void onAllowSleepDisable(){
         UseBlockCallback.EVENT.register((player, world, hand, hitResult) -> {
@@ -82,8 +95,10 @@ public class TheRiseOfHostileGameRule implements ModInitializer {
 
                     boolean bonusDrop =
                             world.getGameRules().get(TheRiseOfHostileGameRule.BONUS_DROP_GAMERULE);
+                    boolean bonusExp =
+                            world.getGameRules().get(TheRiseOfHostileGameRule.BONUS_EXP);
 
-                    BlockPos entityRipPos = entity.blockPosition();
+                    BlockPos entityRipPos = killedEntity.blockPosition();
                     Entity attacker = damageSource.getEntity();
 
                     // Scoreboard Check
@@ -96,7 +111,7 @@ public class TheRiseOfHostileGameRule implements ModInitializer {
                                     && bonusDrop
                     ) {
 
-                        if (entity instanceof Vindicator) {
+                        if (killedEntity instanceof Vindicator) {
 
                             for (
                                     int index0 = 0;
@@ -118,7 +133,7 @@ public class TheRiseOfHostileGameRule implements ModInitializer {
                                 }
                             }
 
-                        } else if (entity instanceof Pillager) {
+                        } else if (killedEntity instanceof Pillager) {
 
                             if (world instanceof ServerLevel _level) {
                                 ItemEntity entityToSpawn_7 = new ItemEntity(
@@ -153,7 +168,7 @@ public class TheRiseOfHostileGameRule implements ModInitializer {
                                 }
                             }
 
-                        } else if (entity.getType().is(TheRiseOfHostileEntityTag.ZOMBIE_BUFF)) {
+                        } else if (killedEntity.getType().is(TheRiseOfHostileEntityTag.ZOMBIE_BUFF)) {
 
                             for (
                                     int index2 = 0;
@@ -191,7 +206,7 @@ public class TheRiseOfHostileGameRule implements ModInitializer {
                                 }
                             }
 
-                        } else if (entity instanceof Creeper) {
+                        } else if (killedEntity instanceof Creeper) {
 
                             for (
                                     int index3 = 0;
@@ -213,7 +228,7 @@ public class TheRiseOfHostileGameRule implements ModInitializer {
                                 }
                             }
 
-                        } else if (entity instanceof Evoker) {
+                        } else if (killedEntity instanceof Evoker) {
 
                             if (world instanceof ServerLevel _level) {
                                 ItemEntity entityToSpawn_18 = new ItemEntity(
@@ -227,6 +242,10 @@ public class TheRiseOfHostileGameRule implements ModInitializer {
                                 entityToSpawn_18.setPickUpDelay(1);
                                 _level.addFreshEntity(entityToSpawn_18);
                             }
+                        }
+                        if (world instanceof ServerLevel serverLevel) {
+                            ExperienceOrb experienceOrb = new ExperienceOrb(killedEntity.level(), killedEntity.position(), Vec3.ZERO, 10);
+                            serverLevel.addFreshEntity(experienceOrb);
                         }
                     }
                 }
