@@ -2,12 +2,13 @@ package com.strongmonster.procedure;
 
 import com.strongmonster.datagen.TheRiseOfHostileEntityTag;
 import com.strongmonster.game_rule.TheRiseOfHostileGameRule;
+import com.strongmonster.mixin.BuffAccess;
 import com.strongmonster.mixin.CreeperMixin;
 import com.strongmonster.mixin.KillerBunnyMixin;
 
+import com.strongmonster.mixin.SpecialBuffAccess;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerEntityEvents;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.network.chat.Component;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.*;
@@ -20,11 +21,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.scores.Objective;
-import net.minecraft.world.scores.ScoreAccess;
-import net.minecraft.world.scores.ScoreHolder;
-import net.minecraft.world.scores.Scoreboard;
-import net.minecraft.world.scores.criteria.ObjectiveCriteria;
 
 import java.lang.Math;
 
@@ -51,39 +47,6 @@ public class MobSpawnBuff {
 
             // Start if isRain true
             if (isRain) {
-                //BUFF
-                Scoreboard scoreboardbuff = level.getScoreboard();
-                Objective objective = scoreboardbuff.getObjective("buff");
-
-                if (objective == null) {
-                    objective = scoreboardbuff.addObjective(
-                            "buff",
-                            ObjectiveCriteria.DUMMY,
-                            Component.literal("Buff"),
-                            ObjectiveCriteria.RenderType.INTEGER,
-                            false,
-                            null
-                    );
-                }
-                ScoreAccess score_buff = scoreboardbuff.getOrCreatePlayerScore(ScoreHolder.forNameOnly(entity.getScoreboardName()), objective);
-
-                // SPECIAL BUFF
-                Scoreboard scoreboardspecialbuff = level.getScoreboard();
-                Objective objective_special = scoreboardspecialbuff.getObjective("special_buff");
-
-                if (objective_special == null) {
-                    objective_special = scoreboardbuff.addObjective(
-                            "special_buff",
-                            ObjectiveCriteria.DUMMY,
-                            Component.literal("Special_Buff"),
-                            ObjectiveCriteria.RenderType.INTEGER,
-                            false,
-                            null
-                    );
-                }
-                ScoreAccess score_special_buff = scoreboardbuff.getOrCreatePlayerScore(ScoreHolder.forNameOnly(entity.getScoreboardName()), objective_special);
-
-
                 if (entity.getType().is(TheRiseOfHostileEntityTag.ZOMBIE_BUFF)) {
                     if (Math.random() < 0.65) {
                         int value =
@@ -92,8 +55,8 @@ public class MobSpawnBuff {
                                         1,
                                         6
                                 );
+                        ((BuffAccess) entity).setBuff(true);
                         if (isThunder) {
-                            score_buff.set(1);
                             if (value == 1 || value == 2) {
                                 if (Math.random() < 0.9) {
                                     main_hand = new ItemStack(Items.DIAMOND_SWORD);
@@ -188,16 +151,15 @@ public class MobSpawnBuff {
                                     player.getInventory().setChanged();
                                 }
                             }
-
                         }
                     } else {
-                        score_special_buff.set(1);
+                        ((SpecialBuffAccess) entity).setSBuff(true);
                         SpecialBuff.run(entity, level);
                     }
                 } else if (entity.getType().is(TheRiseOfHostileEntityTag.SKELETON_BUFF)) {
                     if (Math.random() < 0.85) {
-                        score_buff.set(1);
                         main_hand = new ItemStack(Items.BOW);
+                        ((BuffAccess) entity).setBuff(true);
                         if (isThunder) {
                             main_hand.enchant(
                                     level.registryAccess()
@@ -223,6 +185,7 @@ public class MobSpawnBuff {
                             mainhand_drop = -1.0f;
 
                         } else {
+                            ((BuffAccess) entity).setBuff(true);
                             main_hand.enchant(
                                     level.registryAccess()
                                             .lookupOrThrow(Registries.ENCHANTMENT)
@@ -244,17 +207,17 @@ public class MobSpawnBuff {
                             }
                         }
                     } else {
-                        score_special_buff.set(1);
+                        ((SpecialBuffAccess) entity).setSBuff(true);
                         SpecialBuff.run(entity, level);
                     }
                 } else if (entity instanceof Creeper creeper && isThunder && Math.random() < 0.5) {
-                    score_buff.set(1);
                     creeper.getEntityData().set(
                             CreeperMixin.getDataIsPowered(),
                             true
                     );
+                    ((BuffAccess) entity).setBuff(true);
                 } else if (entity instanceof Drowned) {
-                    score_buff.set(1);
+                    ((BuffAccess) entity).setBuff(true);
                 }
                 EffectBuff.run(level, entity);
                 ArmorEquipInRainWeather.ArmorEquipSpecialCase(entity);

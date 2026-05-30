@@ -40,7 +40,7 @@ public class TheRiseOfHostileEntityTag extends FabricTagProvider.EntityTypeTagPr
                 .add(EntityType.IRON_GOLEM)
                 .add(EntityType.SNOW_GOLEM);
         valueLookupBuilder(ARMOR_EQUIP_BUFF)
-                .addTag(SKELETON_BUFF)s
+                .addTag(SKELETON_BUFF)
                 .addTag(ZOMBIE_BUFF)
                 .add(EntityType.DROWNED);
     }

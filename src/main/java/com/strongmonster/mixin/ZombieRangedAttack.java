@@ -10,8 +10,6 @@ import net.minecraft.world.entity.projectile.hurtingprojectile.WitherSkull;
 import net.minecraft.world.entity.projectile.hurtingprojectile.DragonFireball;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.scores.Objective;
-import net.minecraft.world.scores.Scoreboard;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -22,34 +20,12 @@ public class ZombieRangedAttack {
     @Inject(method="tick", at = @At("HEAD"))
     private void tick(CallbackInfo ci){
         Zombie entity = (Zombie)(Object)this;
-        Scoreboard scoreboard = entity.level().getScoreboard();
-
-        Objective objective = scoreboard.getObjective("special_buff");
-
-        int isSpecialBuffed =
-                scoreboard
-                        .getOrCreatePlayerScore(
-                                entity,
-                                objective
-                        )
-                        .get();
-
-        Objective cooldown_obj = scoreboard.getObjective("cool");
-
-        int getCooldown =
-                scoreboard
-                        .getOrCreatePlayerScore(
-                                entity,
-                                cooldown_obj
-                        )
-                        .get();
-
         if (!(entity.getTarget() == null)
                 && entity.getOffhandItem().is(TheRiseOfHostileItemTag.IS_THROWABLE)
                 && entity instanceof LivingEntity livingEntity
                 && !livingEntity.level().isClientSide()
-                && isSpecialBuffed == 1
-                && getCooldown == 0
+                && ((CoolAccess) entity).getCool() == 0
+                && ((SpecialBuffAccess) entity).getSBuff()
         ) {
             for (int i = 0; i < 5; i++) {
                 if (entity.getOffhandItem().equals(new ItemStack(Items.FIRE_CHARGE))) {
@@ -71,19 +47,9 @@ public class ZombieRangedAttack {
                     livingEntity.level().addFreshEntity(projectile);
                 }
             }
-            scoreboard
-                    .getOrCreatePlayerScore(
-                            entity,
-                            cooldown_obj
-                    )
-                    .set(20);
-        } else if (!(getCooldown == 0) && isSpecialBuffed == 1 && entity instanceof LivingEntity livingEntity && !livingEntity.level().isClientSide() && entity.getOffhandItem().is(TheRiseOfHostileItemTag.IS_THROWABLE)) {
-            scoreboard
-                    .getOrCreatePlayerScore(
-                            entity,
-                            cooldown_obj
-                    )
-                    .set(getCooldown - 1);
+            ((CoolAccess) entity).setCool(20);
+        } else if (!(((CoolAccess) entity).getCool() == 20) && ((SpecialBuffAccess) entity).getSBuff() && entity instanceof LivingEntity livingEntity && !livingEntity.level().isClientSide() && entity.getOffhandItem().is(TheRiseOfHostileItemTag.IS_THROWABLE)) {
+            ((CoolAccess) entity).setCool(((CoolAccess) entity).getCool() - 1);
         }
     }
 }

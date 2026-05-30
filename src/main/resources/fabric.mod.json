@@ -3,7 +3,7 @@
 	"id": "the_rise_of_hostile",
 	"version": "${version}",
 	"name": "The Rise of Hostile",
-	"description": "This is an example description! Tell everyone what your mod is about!",
+	"description": "Stronger Hostile",
 	"authors": [
 		"break08"
 	],
@@ -11,7 +11,7 @@
 		"homepage": "https://fabricmc.net/",
 		"sources": "https://github.com/FabricMC/fabric-example-mod"
 	},
-	"license": "CC0-1.0",
+	"license": "MIT",
 	"icon": "assets/the_rise_of_hostile/icon.png",
 	"environment": "*",
 	"entrypoints": {
@@ -33,6 +33,9 @@
 	],
 	"mixins": [
 		"the_rise_of_hostile.mixin.json"
+	],
+	"client": [
+		"the_rise_of_hostile.client.mixin.json"
 	],
 	"depends": {
 		"fabricloader": ">=0.19.2",

@@ -1,11 +1,15 @@
 package com.strongmonster.procedure;
 
 import com.strongmonster.game_rule.TheRiseOfHostileGameRule;
+import com.strongmonster.mixin.BuffAccess;
+import com.strongmonster.mixin.SpecialBuffAccess;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerEntityEvents;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.monster.Vex;
 import net.minecraft.world.entity.monster.illager.Evoker;
 import net.minecraft.world.entity.monster.illager.Pillager;
@@ -29,37 +33,6 @@ public class IllagerBuff {
 
 
             //BUFF
-            Scoreboard scoreboardbuff = level.getScoreboard();
-            Objective objective = scoreboardbuff.getObjective("buff");
-
-            if (objective == null) {
-                objective = scoreboardbuff.addObjective(
-                        "buff",
-                        ObjectiveCriteria.DUMMY,
-                        Component.literal("Buff"),
-                        ObjectiveCriteria.RenderType.INTEGER,
-                        false,
-                        null
-                );
-            }
-            ScoreAccess score_buff = scoreboardbuff.getOrCreatePlayerScore(ScoreHolder.forNameOnly(entity.getScoreboardName()), objective);
-
-            // SPECIAL BUFF
-            Scoreboard scoreboardspecialbuff = level.getScoreboard();
-            Objective objective_special = scoreboardspecialbuff.getObjective("special_buff");
-
-            if (objective_special == null) {
-                objective_special = scoreboardbuff.addObjective(
-                        "special_buff",
-                        ObjectiveCriteria.DUMMY,
-                        Component.literal("Special_Buff"),
-                        ObjectiveCriteria.RenderType.INTEGER,
-                        false,
-                        null
-                );
-            }
-            ScoreAccess score_special_buff = scoreboardbuff.getOrCreatePlayerScore(ScoreHolder.forNameOnly(entity.getScoreboardName()), objective_special);
-
             boolean isRain = level.isRaining();
 
             boolean allDrop = world.getGameRules().get(TheRiseOfHostileGameRule.ALL_DIAMOND_GEAR_DROP_GAMERULE);
@@ -68,7 +41,7 @@ public class IllagerBuff {
             ItemStack main_hand = ItemStack.EMPTY;
             if (entity instanceof LivingEntity living_entity) {
                 if (living_entity instanceof Pillager && !(living_entity.getMainHandItem().isEmpty())) {
-                    score_buff.set(1);
+                    ((BuffAccess) entity).setBuff(true);
                     if (isRain) {
                         living_entity.getMainHandItem().enchant(
                                 level.registryAccess()
@@ -129,7 +102,7 @@ public class IllagerBuff {
                         );
                     }
                 } else if (living_entity instanceof Vindicator) {
-                    score_buff.set(1);
+                    ((BuffAccess) entity).setBuff(true);
                     if (Math.random() < 0.7) {
                         if (isRain){
                             if (Math.random() < 0.5){
@@ -155,7 +128,7 @@ public class IllagerBuff {
                         living_entity.setItemInHand(InteractionHand.MAIN_HAND, main_hand.copy());
                         mainhand_drop = -1.0f;
                     } else {
-                        score_special_buff.set(1);
+                        ((SpecialBuffAccess) entity).setSBuff(true);
                     }
                 } else if (living_entity instanceof Vex){
                     if (isRain) {
@@ -171,10 +144,16 @@ public class IllagerBuff {
                         if (!allDrop) {mainhand_drop = -1.0f;}
                     }
                 } else if (living_entity instanceof Evoker) {
-                    score_buff.set(1);
+                    ((BuffAccess) entity).setBuff(true);
                 }
                 EffectBuff.run(level, entity);
                 SpecialBuff.run(entity, level);
+                if (entity instanceof LivingEntity livingEntity){
+                    livingEntity.setItemSlot(EquipmentSlot.MAINHAND, main_hand);
+                }
+                if (entity instanceof Mob mob){
+                    mob.setDropChance(EquipmentSlot.MAINHAND, mainhand_drop);
+                }
             }
         });
     }

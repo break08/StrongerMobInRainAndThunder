@@ -1,7 +1,6 @@
 package com.strongmonster.procedure;
 
-import com.strongmonster.head_lib.CustomGetScoreboard;
-
+import com.strongmonster.mixin.SpecialBuffAccess;
 import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -15,7 +14,7 @@ public class BadEffectToTarget {
                 (entity, source, healthAmount, shieldBlocked, a) -> {
                     Entity attacker = source.getEntity();
                     if (!(attacker == null)) {
-                        if (CustomGetScoreboard.getScoreBoard(attacker, "special_buff") == 1
+                        if (((SpecialBuffAccess) entity).getSBuff()
                                 && !entity.level().isClientSide()
                                 && attacker instanceof LivingEntity livingAttacker
                                 && !(livingAttacker.getOffhandItem().isEmpty())

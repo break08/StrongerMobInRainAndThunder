@@ -1,11 +1,13 @@
 {
   "required": true,
   "package": "com.strongmonster.mixin",
-  "compatibilityLevel": "JAVA_25",
+  "compatibilityLevel": "JAVA_21",
   "mixins": [
     "CreeperMixin",
     "KillerBunnyMixin",
-    "ZombieRangedAttack"
+    "ZombieRangedAttack",
+    "GiveBuff",
+    "GiveCool"
   ],
   "injectors": {
     "defaultRequire": 1

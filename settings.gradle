@@ -10,4 +10,4 @@ pluginManagement {
 }
 
 // Should match your modid
-rootProject.name = 'the_rise_of_hostile'
+rootProject.name = 'the-rise-of-hostile'
