@@ -1,6 +1,6 @@
 package com.strongmonster.procedure;
 
-import com.strongmonster.datagen.TheRiseOfHostileEntityTag;
+import com.strongmonster.datagen.tag.TheRiseOfHostileEntityTag;
 import com.strongmonster.game_rule.TheRiseOfHostileGameRule;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.server.level.ServerLevel;

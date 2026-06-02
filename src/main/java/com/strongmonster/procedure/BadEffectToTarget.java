@@ -1,6 +1,6 @@
 package com.strongmonster.procedure;
 
-import com.strongmonster.mixin.SpecialBuffAccess;
+import com.strongmonster.mixin.nbt_mix.SpecialBuffAccess;
 import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;

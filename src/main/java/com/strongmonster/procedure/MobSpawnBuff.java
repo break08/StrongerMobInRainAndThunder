@@ -1,12 +1,12 @@
 package com.strongmonster.procedure;
 
-import com.strongmonster.datagen.TheRiseOfHostileEntityTag;
+import com.strongmonster.datagen.tag.TheRiseOfHostileEntityTag;
 import com.strongmonster.game_rule.TheRiseOfHostileGameRule;
-import com.strongmonster.mixin.BuffAccess;
-import com.strongmonster.mixin.CreeperMixin;
-import com.strongmonster.mixin.KillerBunnyMixin;
+import com.strongmonster.mixin.nbt_mix.BuffAccess;
+import com.strongmonster.mixin.private_access.CreeperMixin;
+import com.strongmonster.mixin.private_access.KillerBunnyMixin;
 
-import com.strongmonster.mixin.SpecialBuffAccess;
+import com.strongmonster.mixin.nbt_mix.SpecialBuffAccess;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerEntityEvents;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.util.Mth;
@@ -190,14 +190,28 @@ public class MobSpawnBuff {
                                     level.registryAccess()
                                             .lookupOrThrow(Registries.ENCHANTMENT)
                                             .getOrThrow(Enchantments.PUNCH),
-                                    2
+                                    Mth.nextInt(
+                                            level.random,
+                                            2,
+                                            3
+                                    )
                             );
 
                             main_hand.enchant(
                                     level.registryAccess()
                                             .lookupOrThrow(Registries.ENCHANTMENT)
                                             .getOrThrow(Enchantments.POWER),
-                                    3
+                                    Mth.nextInt(
+                                            level.random,
+                                            3,
+                                            4
+                                    )
+                            );
+                            main_hand.enchant(
+                                    level.registryAccess()
+                                            .lookupOrThrow(Registries.ENCHANTMENT)
+                                            .getOrThrow(Enchantments.FLAME),
+                                    1
                             );
                         }
                         if (entity instanceof LivingEntity living_entity) {

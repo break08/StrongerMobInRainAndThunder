@@ -3,7 +3,7 @@ package com.strongmonster.client.mixin;
 import com.strongmonster.TheRiseOfHostile;
 import com.strongmonster.client.config.TheRiseOfHostileConfig;
 import com.strongmonster.item.TheRiseOfHostileItem;
-import com.strongmonster.mixin.SpecialBuffAccess;
+import com.strongmonster.mixin.nbt_mix.SpecialBuffAccess;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.monster.zombie.Zombie;
 import net.minecraft.world.level.Level;

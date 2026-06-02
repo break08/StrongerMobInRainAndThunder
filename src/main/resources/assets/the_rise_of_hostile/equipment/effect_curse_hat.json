@@ -1,0 +1,14 @@
+{
+  "layers": {
+    "humanoid": [
+      {
+        "texture": "the_rise_of_hostile:effect_curse_layer_1"
+      }
+    ],
+    "humanoid_leggings": [
+      {
+        "texture": "the_rise_of_hostile:effect_curse_layer_2"
+      }
+    ]
+  }
+}

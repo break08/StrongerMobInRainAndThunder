@@ -1,0 +1,14 @@
+package com.strongmonster.mixin.private_access;
+
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.world.entity.animal.rabbit.Rabbit;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.gen.Accessor;
+
+@Mixin(Rabbit.class)
+public interface KillerBunnyMixin {
+    @Accessor("DATA_TYPE_ID")
+    static EntityDataAccessor<Integer> setVariant() {
+        throw new AssertionError();
+    }
+}

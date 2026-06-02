@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "the_rise_of_hostile:item/effect_curse_hat"
+  }
+}

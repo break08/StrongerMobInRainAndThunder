@@ -1,4 +1,4 @@
-package com.strongmonster.mixin;
+package com.strongmonster.mixin.nbt_mix;
 
 public class GiveSpecialBuff implements SpecialBuffAccess{
     private boolean sbuff;

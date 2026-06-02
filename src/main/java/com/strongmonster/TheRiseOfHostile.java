@@ -32,6 +32,7 @@ public class TheRiseOfHostile implements ModInitializer {
 		BadEffectToTarget.register();
 		DynamiteExplode.register();
 		CommonBuff.register();
+		SkeletonShootBadEffect.register();
 
 		// Particle
 		Registry.register(BuiltInRegistries.PARTICLE_TYPE, Identifier.fromNamespaceAndPath(MOD_ID, "explode_zombie"), EXPLODE_ZOMBIE);

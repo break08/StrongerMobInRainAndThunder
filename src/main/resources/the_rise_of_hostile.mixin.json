@@ -3,11 +3,11 @@
   "package": "com.strongmonster.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
-    "CreeperMixin",
-    "KillerBunnyMixin",
+    "private_access.CreeperMixin",
+    "private_access.KillerBunnyMixin",
     "ZombieRangedAttack",
-    "GiveBuff",
-    "GiveCool"
+    "nbt_mix.GiveBuff",
+    "nbt_mix.GiveCool"
   ],
   "injectors": {
     "defaultRequire": 1

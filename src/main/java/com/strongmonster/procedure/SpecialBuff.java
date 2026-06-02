@@ -1,11 +1,11 @@
 package com.strongmonster.procedure;
 
-import com.strongmonster.datagen.TheRiseOfHostileEntityTag;
-import com.strongmonster.datagen.TheRiseOfHostileItemTag;
+import com.strongmonster.datagen.tag.TheRiseOfHostileEntityTag;
+import com.strongmonster.datagen.tag.TheRiseOfHostileItemTag;
 
 import com.strongmonster.item.TheRiseOfHostileItem;
-import com.strongmonster.mixin.CoolAccess;
-import com.strongmonster.mixin.SpecialBuffAccess;
+import com.strongmonster.mixin.nbt_mix.CoolAccess;
+import com.strongmonster.mixin.nbt_mix.SpecialBuffAccess;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;

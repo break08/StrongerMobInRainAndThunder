@@ -2,7 +2,7 @@ package com.strongmonster.effect;
 
 import java.lang.Math;
 
-import com.strongmonster.datagen.TheRiseOfHostileItemTag;
+import com.strongmonster.datagen.tag.TheRiseOfHostileItemTag;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;

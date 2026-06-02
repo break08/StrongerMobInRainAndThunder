@@ -1,7 +1,7 @@
 package com.strongmonster.procedure;
 
-import com.strongmonster.datagen.TheRiseOfHostileEntityTag;
-import com.strongmonster.mixin.BuffAccess;
+import com.strongmonster.datagen.tag.TheRiseOfHostileEntityTag;
+import com.strongmonster.mixin.nbt_mix.BuffAccess;
 import net.fabricmc.fabric.api.entity.event.v1.ServerEntityCombatEvents;
 import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;

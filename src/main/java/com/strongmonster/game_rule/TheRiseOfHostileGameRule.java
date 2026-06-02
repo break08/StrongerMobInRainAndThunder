@@ -1,7 +1,7 @@
 package com.strongmonster.game_rule;
 
 import com.strongmonster.TheRiseOfHostile;
-import com.strongmonster.datagen.TheRiseOfHostileEntityTag;
+import com.strongmonster.datagen.tag.TheRiseOfHostileEntityTag;
 
 // Head lib
 import com.strongmonster.head_lib.CustomGetScoreboard;

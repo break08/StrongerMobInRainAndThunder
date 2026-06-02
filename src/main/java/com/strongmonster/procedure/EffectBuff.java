@@ -1,6 +1,6 @@
 package com.strongmonster.procedure;
 
-import com.strongmonster.mixin.BuffAccess;
+import com.strongmonster.mixin.nbt_mix.BuffAccess;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 

@@ -1,15 +1,16 @@
 package com.strongmonster.mixin;
 
-import com.strongmonster.datagen.TheRiseOfHostileItemTag;
+import com.strongmonster.datagen.tag.TheRiseOfHostileItemTag;
 
-import net.minecraft.world.entity.EntityType;
+import com.strongmonster.mixin.nbt_mix.CoolAccess;
+import com.strongmonster.mixin.nbt_mix.SpecialBuffAccess;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.monster.zombie.Zombie;
 import net.minecraft.world.entity.projectile.hurtingprojectile.SmallFireball;
 import net.minecraft.world.entity.projectile.hurtingprojectile.WitherSkull;
 import net.minecraft.world.entity.projectile.hurtingprojectile.DragonFireball;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.phys.Vec3;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -28,22 +29,30 @@ public class ZombieRangedAttack {
                 && ((SpecialBuffAccess) entity).getSBuff()
         ) {
             for (int i = 0; i < 5; i++) {
-                if (entity.getOffhandItem().equals(new ItemStack(Items.FIRE_CHARGE))) {
-                    SmallFireball projectile = new SmallFireball(EntityType.SMALL_FIREBALL, livingEntity.level());
-                    projectile.setPos(livingEntity.getX(), livingEntity.getEyeY() - 0.1, livingEntity.getZ());
-                    projectile.shoot(livingEntity.getLookAngle().x, livingEntity.getLookAngle().y, livingEntity.getLookAngle().z, 2, 0.5f);
+                double e = entity.getTarget().getX() - livingEntity.getX();
+                double f = entity.getTarget().getY(0.5F) - livingEntity.getY(0.5F);
+                double g = entity.getTarget().getZ() - livingEntity.getZ();
+
+                double h = Math.sqrt(Math.sqrt(entity.distanceToSqr(entity.getTarget()))) * 0.5F;
+                Vec3 vec3 = new Vec3(
+                        entity.getRandom().triangle(e, 2.297 * h),
+                        f,
+                        entity.getRandom().triangle(g, 2.297 * h)
+                );
+                if (entity.getOffhandItem().is(Items.FIRE_CHARGE)) {
+                    SmallFireball projectile = new SmallFireball(entity.level(), entity, vec3.normalize());
+                    projectile.setPos(projectile.getX(), entity.getY(0.5F) + 0.5F, projectile.getZ());
 
                     livingEntity.level().addFreshEntity(projectile);
-                } else if (entity.getOffhandItem().equals(new ItemStack(Items.WITHER_SKELETON_SKULL))) {
-                    WitherSkull projectile = new WitherSkull(EntityType.WITHER_SKULL, livingEntity.level());
-                    projectile.setPos(livingEntity.getX(), livingEntity.getEyeY() - 0.1, livingEntity.getZ());
-                    projectile.shoot(livingEntity.getLookAngle().x, livingEntity.getLookAngle().y, livingEntity.getLookAngle().z, 2, 0.5f);
+                } else if (entity.getOffhandItem().is(Items.WITHER_SKELETON_SKULL)) {
+                    WitherSkull projectile = new WitherSkull(entity.level(), entity, vec3.normalize());
+                    projectile.setPos(projectile.getX(), entity.getY(0.5F) + 0.5F, projectile.getZ());
 
                     livingEntity.level().addFreshEntity(projectile);
-                } else if (entity.getOffhandItem().equals(new ItemStack(Items.DRAGON_BREATH))) {
-                    DragonFireball projectile = new DragonFireball(EntityType.DRAGON_FIREBALL, livingEntity.level());
-                    projectile.setPos(livingEntity.getX(), livingEntity.getEyeY() - 0.1, livingEntity.getZ());
-                    projectile.shoot(livingEntity.getLookAngle().x, livingEntity.getLookAngle().y, livingEntity.getLookAngle().z, 2, 0.5f);
+                } else if (entity.getOffhandItem().is(Items.DRAGON_BREATH)) {
+                    DragonFireball projectile = new DragonFireball(entity.level(), entity, vec3.normalize());
+                    projectile.setPos(projectile.getX(), entity.getY(0.5F) + 0.5F, projectile.getZ());
+
                     livingEntity.level().addFreshEntity(projectile);
                 }
             }

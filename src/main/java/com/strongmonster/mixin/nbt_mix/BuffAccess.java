@@ -1,4 +1,4 @@
-package com.strongmonster.mixin;
+package com.strongmonster.mixin.nbt_mix;
 
 public interface BuffAccess {
     boolean getBuff();

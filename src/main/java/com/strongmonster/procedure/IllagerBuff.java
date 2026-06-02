@@ -1,11 +1,10 @@
 package com.strongmonster.procedure;
 
 import com.strongmonster.game_rule.TheRiseOfHostileGameRule;
-import com.strongmonster.mixin.BuffAccess;
-import com.strongmonster.mixin.SpecialBuffAccess;
+import com.strongmonster.mixin.nbt_mix.BuffAccess;
+import com.strongmonster.mixin.nbt_mix.SpecialBuffAccess;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerEntityEvents;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -18,11 +17,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.scores.Objective;
-import net.minecraft.world.scores.ScoreAccess;
-import net.minecraft.world.scores.ScoreHolder;
-import net.minecraft.world.scores.Scoreboard;
-import net.minecraft.world.scores.criteria.ObjectiveCriteria;
 
 public class IllagerBuff {
     public static void register(){IllagerSpawn();}
