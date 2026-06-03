@@ -141,7 +141,7 @@ public class IllagerBuff {
                     ((BuffAccess) entity).setBuff(true);
                 }
                 EffectBuff.run(level, entity);
-                SpecialBuff.run(entity, level);
+                SpecialBuff.run(entity);
                 if (entity instanceof LivingEntity livingEntity){
                     livingEntity.setItemSlot(EquipmentSlot.MAINHAND, main_hand);
                 }

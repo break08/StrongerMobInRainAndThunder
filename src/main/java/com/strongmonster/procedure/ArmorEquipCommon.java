@@ -14,7 +14,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantments;
 
 public class ArmorEquipCommon {
-    public static void CommonEquip(Entity entity){
+    public static void CommonEquip(Entity entity, boolean for_head, boolean for_chest, boolean for_leg, boolean for_boot){
         boolean isRain = entity.level().isRaining();
 
         if (!isRain && entity.getType().is(TheRiseOfHostileEntityTag.ARMOR_EQUIP_BUFF) && entity.level() instanceof ServerLevel serverLevel){
@@ -29,138 +29,151 @@ public class ArmorEquipCommon {
             float leg_drop = 0.085f;
             float boot_drop = 0.085f;
 
-            // HELMET
             double random = Math.random() * 160;
 
-            if (random < 10) {
-                helmet = new ItemStack(Items.LEATHER_HELMET);
+            // HELMET
 
-            } else if (random < 30) { // 10 + 20
-                helmet = new ItemStack(Items.CHAINMAIL_HELMET);
+            if (for_head) {
+                if (random < 10) {
+                    helmet = new ItemStack(Items.LEATHER_HELMET);
+                } else if (random < 30) { // 10 + 20
+                    helmet = new ItemStack(Items.CHAINMAIL_HELMET);
 
-            } else if (random < 100) { // 30 + 70
-                helmet = new ItemStack(Items.IRON_HELMET);
+                } else if (random < 100) { // 30 + 70
+                    helmet = new ItemStack(Items.IRON_HELMET);
 
-            } else if (random < 135) { // 100 + 35
-                helmet = new ItemStack(Items.GOLDEN_HELMET);
+                } else if (random < 135) { // 100 + 35
+                    helmet = new ItemStack(Items.GOLDEN_HELMET);
 
-            } else if (random < 153) { // 135 + 18
-                helmet = new ItemStack(Items.DIAMOND_HELMET);
-                if (!allDrop){helmet_drop = -1.0f;}
-            } else {
-                helmet = new ItemStack(Items.NETHERITE_HELMET);
-                helmet_drop = -1.0f;
+                } else if (random < 153) { // 135 + 18
+                    helmet = new ItemStack(Items.DIAMOND_HELMET);
+                    if (!allDrop) {
+                        helmet_drop = -1.0f;
+                    }
+                } else {
+                    helmet = new ItemStack(Items.NETHERITE_HELMET);
+                    helmet_drop = -1.0f;
+                }
+
+                helmet.enchant(
+                        entity.level().registryAccess()
+                                .lookupOrThrow(Registries.ENCHANTMENT)
+                                .getOrThrow(Enchantments.PROTECTION),
+                        Mth.nextInt(
+                                entity.level().random,
+                                1,
+                                3
+                        )
+                );
             }
 
             // CHEST
+            if (for_chest) {
+                if (random < 10) {
+                    chest = new ItemStack(Items.LEATHER_CHESTPLATE);
 
-            if (random < 10) {
-                chest = new ItemStack(Items.LEATHER_CHESTPLATE);
+                } else if (random < 30) { // 10 + 20
+                    chest = new ItemStack(Items.CHAINMAIL_CHESTPLATE);
 
-            } else if (random < 30) { // 10 + 20
-                chest = new ItemStack(Items.CHAINMAIL_CHESTPLATE);
+                } else if (random < 100) { // 30 + 70
+                    chest = new ItemStack(Items.IRON_CHESTPLATE);
 
-            } else if (random < 100) { // 30 + 70
-                chest = new ItemStack(Items.IRON_CHESTPLATE);
+                } else if (random < 135) { // 100 + 35
+                    chest = new ItemStack(Items.GOLDEN_CHESTPLATE);
 
-            } else if (random < 135) { // 100 + 35
-                chest = new ItemStack(Items.GOLDEN_CHESTPLATE);
+                } else if (random < 153) { // 135 + 18
+                    chest = new ItemStack(Items.DIAMOND_CHESTPLATE);
+                    if (!allDrop) {
+                        chest_drop = -1.0f;
+                    }
 
-            } else if (random < 153) { // 135 + 18
-                chest = new ItemStack(Items.DIAMOND_CHESTPLATE);
-                if (!allDrop){chest_drop = -1.0f;}
-
-            } else {
-                chest = new ItemStack(Items.NETHERITE_CHESTPLATE);
-                chest_drop = -1.0f;
+                } else {
+                    chest = new ItemStack(Items.NETHERITE_CHESTPLATE);
+                    chest_drop = -1.0f;
+                }
+                chest.enchant(
+                        entity.level().registryAccess()
+                                .lookupOrThrow(Registries.ENCHANTMENT)
+                                .getOrThrow(Enchantments.PROTECTION),
+                        Mth.nextInt(
+                                entity.level().random,
+                                1,
+                                3
+                        )
+                );
             }
 
             // LEG
-            if (random < 10) {
-                leg = new ItemStack(Items.LEATHER_LEGGINGS);
+            if (for_leg) {
+                if (random < 10) {
+                    leg = new ItemStack(Items.LEATHER_LEGGINGS);
 
-            } else if (random < 30) { // 10 + 20
-                leg  = new ItemStack(Items.CHAINMAIL_LEGGINGS);
+                } else if (random < 30) { // 10 + 20
+                    leg = new ItemStack(Items.CHAINMAIL_LEGGINGS);
 
-            } else if (random < 100) { // 30 + 70
-                leg  = new ItemStack(Items.IRON_LEGGINGS);
+                } else if (random < 100) { // 30 + 70
+                    leg = new ItemStack(Items.IRON_LEGGINGS);
 
-            } else if (random < 135) { // 100 + 35
-                leg  = new ItemStack(Items.GOLDEN_LEGGINGS);
+                } else if (random < 135) { // 100 + 35
+                    leg = new ItemStack(Items.GOLDEN_LEGGINGS);
 
-            } else if (random < 153) { // 135 + 18
-                leg  = new ItemStack(Items.DIAMOND_LEGGINGS);
-                if (!allDrop){leg_drop = -1.0f;}
+                } else if (random < 153) { // 135 + 18
+                    leg = new ItemStack(Items.DIAMOND_LEGGINGS);
+                    if (!allDrop) {
+                        leg_drop = -1.0f;
+                    }
 
-            } else {
-                leg  = new ItemStack(Items.NETHERITE_LEGGINGS);
-                leg_drop = -1.0f;
+                } else {
+                    leg = new ItemStack(Items.NETHERITE_LEGGINGS);
+                    leg_drop = -1.0f;
+                }
+                leg.enchant(
+                        entity.level().registryAccess()
+                                .lookupOrThrow(Registries.ENCHANTMENT)
+                                .getOrThrow(Enchantments.PROTECTION),
+                        Mth.nextInt(
+                                entity.level().random,
+                                1,
+                                3
+                        )
+                );
             }
 
             // BOOT
-            if (random < 10) {
-                boot = new ItemStack(Items.LEATHER_BOOTS);
+            if (for_boot) {
+                if (random < 10) {
+                    boot = new ItemStack(Items.LEATHER_BOOTS);
 
-            } else if (random < 30) { // 10 + 20
-                boot = new ItemStack(Items.CHAINMAIL_BOOTS);
+                } else if (random < 30) { // 10 + 20
+                    boot = new ItemStack(Items.CHAINMAIL_BOOTS);
 
-            } else if (random < 100) { // 30 + 70
-                boot = new ItemStack(Items.IRON_BOOTS);
+                } else if (random < 100) { // 30 + 70
+                    boot = new ItemStack(Items.IRON_BOOTS);
 
-            } else if (random < 135) { // 100 + 35
-                boot = new ItemStack(Items.GOLDEN_BOOTS);
+                } else if (random < 135) { // 100 + 35
+                    boot = new ItemStack(Items.GOLDEN_BOOTS);
 
-            } else if (random < 153) { // 135 + 18
-                boot = new ItemStack(Items.DIAMOND_BOOTS);
-                if (!allDrop){boot_drop = -1.0f;}
-            } else {
-                boot = new ItemStack(Items.NETHERITE_BOOTS);
-                boot_drop = -1.0f;
+                } else if (random < 153) { // 135 + 18
+                    boot = new ItemStack(Items.DIAMOND_BOOTS);
+                    if (!allDrop) {
+                        boot_drop = -1.0f;
+                    }
+                } else {
+                    boot = new ItemStack(Items.NETHERITE_BOOTS);
+                    boot_drop = -1.0f;
+                }
+
+                boot.enchant(
+                        entity.level().registryAccess()
+                                .lookupOrThrow(Registries.ENCHANTMENT)
+                                .getOrThrow(Enchantments.PROTECTION),
+                        Mth.nextInt(
+                                entity.level().random,
+                                1,
+                                3
+                        )
+                );
             }
-
-            boot.enchant(
-                    entity.level().registryAccess()
-                            .lookupOrThrow(Registries.ENCHANTMENT)
-                            .getOrThrow(Enchantments.PROTECTION),
-                    Mth.nextInt(
-                            entity.level().random,
-                            1,
-                            3
-                    )
-            );
-
-            chest.enchant(
-                    entity.level().registryAccess()
-                            .lookupOrThrow(Registries.ENCHANTMENT)
-                            .getOrThrow(Enchantments.PROTECTION),
-                    Mth.nextInt(
-                            entity.level().random,
-                            1,
-                            3
-                    )
-            );
-
-            leg.enchant(
-                    entity.level().registryAccess()
-                            .lookupOrThrow(Registries.ENCHANTMENT)
-                            .getOrThrow(Enchantments.PROTECTION),
-                    Mth.nextInt(
-                            entity.level().random,
-                            1,
-                            3
-                    )
-            );
-
-           helmet.enchant(
-                    entity.level().registryAccess()
-                            .lookupOrThrow(Registries.ENCHANTMENT)
-                            .getOrThrow(Enchantments.PROTECTION),
-                    Mth.nextInt(
-                            entity.level().random,
-                            1,
-                            3
-                    )
-            );
 
            if (entity instanceof LivingEntity livingEntity) {
                  livingEntity.setItemSlot(EquipmentSlot.HEAD, helmet);

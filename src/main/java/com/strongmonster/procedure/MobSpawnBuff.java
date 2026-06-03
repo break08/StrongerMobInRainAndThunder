@@ -86,7 +86,7 @@ public class MobSpawnBuff {
                                     level.registryAccess()
                                             .lookupOrThrow(Registries.ENCHANTMENT)
                                             .getOrThrow(Enchantments.FIRE_ASPECT),
-                                    1
+                                    2
                             );
                             main_hand.enchant(
                                     level.registryAccess()
@@ -142,8 +142,24 @@ public class MobSpawnBuff {
                                     level.registryAccess()
                                             .lookupOrThrow(Registries.ENCHANTMENT)
                                             .getOrThrow(Enchantments.SHARPNESS),
-                                    2
+                                    Mth.nextInt(
+                                            level.random,
+                                            3,
+                                            5
+                                    )
                             );
+
+                            main_hand.enchant(
+                                    level.registryAccess()
+                                            .lookupOrThrow(Registries.ENCHANTMENT)
+                                            .getOrThrow(Enchantments.FIRE_ASPECT),
+                                    Mth.nextInt(
+                                            level.random,
+                                            1,
+                                            2
+                                    )
+                            );
+
 
                             if (entity instanceof LivingEntity living_entity) {
                                 living_entity.setItemInHand(InteractionHand.MAIN_HAND, main_hand.copy());
@@ -154,7 +170,7 @@ public class MobSpawnBuff {
                         }
                     } else {
                         ((SpecialBuffAccess) entity).setSBuff(true);
-                        SpecialBuff.run(entity, level);
+                        SpecialBuff.run(entity);
                     }
                 } else if (entity.getType().is(TheRiseOfHostileEntityTag.SKELETON_BUFF)) {
                     if (Math.random() < 0.85) {
@@ -222,7 +238,7 @@ public class MobSpawnBuff {
                         }
                     } else {
                         ((SpecialBuffAccess) entity).setSBuff(true);
-                        SpecialBuff.run(entity, level);
+                        SpecialBuff.run(entity);
                     }
                 } else if (entity instanceof Creeper creeper && isThunder && Math.random() < 0.5) {
                     creeper.getEntityData().set(
@@ -234,7 +250,9 @@ public class MobSpawnBuff {
                     ((BuffAccess) entity).setBuff(true);
                 }
                 EffectBuff.run(level, entity);
-                ArmorEquipInRainWeather.ArmorEquipSpecialCase(entity);
+                if (((BuffAccess) entity).getBuff()) {
+                    ArmorEquipInRainWeather.ArmorEquipSpecialCase(entity, true, true, true, true);
+                }
                 if (entity instanceof Mob mob) {
                     mob.setDropChance(EquipmentSlot.MAINHAND, mainhand_drop);
                 }

@@ -22,7 +22,6 @@ public class TheRiseOfHostile implements ModInitializer {
 	@Override
 	public void onInitialize() {
 		// Item Register
-
 		TheRiseOfHostileItem.initialize();
 
 		// Procedure Register

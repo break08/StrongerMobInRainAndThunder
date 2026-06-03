@@ -25,25 +25,75 @@ public class CommonBuff {
         ServerEntityEvents.ENTITY_LOAD.register((entity, world) -> {
 
             ItemStack main_hand = ItemStack.EMPTY;
+            float mainhand_drop = 0.085f;
 
-            if (!(entity.level().isRaining())){
+            if (!(entity.level().isRaining())) {
                 Level level = entity.level();
                 boolean allDrop = world.getGameRules().get(TheRiseOfHostileGameRule.ALL_DIAMOND_GEAR_DROP_GAMERULE);
-                float mainhand_drop = 0.085f;
 
-
-                if (Math.random() < 0.78){
+                if (Math.random() < 0.78) {
                     ((BuffAccess) entity).setBuff(true);
-                    if (entity.getType().is(TheRiseOfHostileEntityTag.ZOMBIE_BUFF)){
-                        if (Math.random() < 0.8){
-                            main_hand = new ItemStack(Items.IRON_SWORD);
-                        } else if (Math.random() < 0.7){
-                            main_hand = new ItemStack(Items.DIAMOND_SWORD);
-                            if (!allDrop){mainhand_drop = -1.0f;}
+                    if (entity.getType().is(TheRiseOfHostileEntityTag.ZOMBIE_BUFF)) {
+                        if (Math.random() < 0.8) {
+                            if (Math.random() < 0.85) {
+                                if (Math.random() < 0.65) {
+                                    main_hand = new ItemStack(Items.IRON_SWORD);
+                                } else {
+                                    main_hand = new ItemStack(Items.IRON_AXE);
+                                }
+                            } else {
+                                main_hand = new ItemStack(Items.IRON_SPEAR);
+                            }
+                        } else if (Math.random() < 0.7) {
+                            if (Math.random() < 0.85) {
+                                if (Math.random() < 0.65) {
+                                    main_hand = new ItemStack(Items.DIAMOND_SWORD);
+                                } else {
+                                    main_hand = new ItemStack(Items.DIAMOND_AXE);
+                                }
+                            } else {
+                                main_hand = new ItemStack(Items.DIAMOND_SPEAR);
+                            }
+                            if (!allDrop) {
+                                mainhand_drop = -1.0f;
+                            }
                         } else {
-                            main_hand = new ItemStack(Items.NETHERITE_SWORD);
+                            if (Math.random() < 0.85) {
+                                if (Math.random() < 0.65) {
+                                    main_hand = new ItemStack(Items.NETHERITE_SWORD);
+                                } else {
+                                    main_hand = new ItemStack(Items.NETHERITE_AXE);
+                                }
+                            } else {
+                                main_hand = new ItemStack(Items.NETHERITE_SPEAR);
+                            }
                             mainhand_drop = -1.0f;
                         }
+
+                        main_hand.enchant(
+                                level.registryAccess()
+                                        .lookupOrThrow(Registries.ENCHANTMENT)
+                                        .getOrThrow(Enchantments.SHARPNESS),
+                                Mth.nextInt(
+                                        level.random,
+                                        1,
+                                        5
+                                )
+                        );
+
+                        if (Math.random() < 0.5){
+                            main_hand.enchant(
+                                    level.registryAccess()
+                                            .lookupOrThrow(Registries.ENCHANTMENT)
+                                            .getOrThrow(Enchantments.FIRE_ASPECT),
+                                    Mth.nextInt(
+                                            level.random,
+                                            1,
+                                            2
+                                    )
+                            );
+                        }
+
                     } else if (entity.getType().is(TheRiseOfHostileEntityTag.SKELETON_BUFF)) {
                         main_hand = new ItemStack(Items.BOWL);
                         main_hand.enchant(
@@ -80,16 +130,18 @@ public class CommonBuff {
                     ((SpecialBuffAccess) entity).setSBuff(true);
                 }
 
-                if (entity instanceof Drowned){
+                if (entity instanceof Drowned) {
                     ((BuffAccess) entity).setBuff(true);
                 }
 
-                ArmorEquipCommon.CommonEquip(entity);
-                EffectBuff.run(level, entity);
-                if (entity instanceof LivingEntity livingEntity){
+                if (((BuffAccess) entity).getBuff()) {
+                    ArmorEquipCommon.CommonEquip(entity, true, true, true, true);
+                }
+                EffectBuff.run(entity.level(), entity);
+                if (entity instanceof LivingEntity livingEntity) {
                     livingEntity.setItemSlot(EquipmentSlot.MAINHAND, main_hand);
                 }
-                if (entity instanceof Mob mob){
+                if (entity instanceof Mob mob) {
                     mob.setDropChance(EquipmentSlot.MAINHAND, mainhand_drop);
                 }
             }

@@ -14,7 +14,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantments;
 
 public class ArmorEquipInRainWeather {
-    public static void ArmorEquipSpecialCase(Entity entity){
+    public static void ArmorEquipSpecialCase(Entity entity, boolean for_head, boolean for_chest, boolean for_leg, boolean for_boot){
         boolean isRain = entity.level().isRaining();
         boolean isThunder = entity.level().isThundering();
         boolean allDrop = false;
@@ -37,81 +37,89 @@ public class ArmorEquipInRainWeather {
             if (entity.getType().is(TheRiseOfHostileEntityTag.ARMOR_EQUIP_BUFF)){
                 if (isThunder){
                     // HELMET
-                    if (Math.random() < 0.25) {
-                        helmet = new ItemStack(Items.NETHERITE_HELMET);
-                        helmet_drop = -1.0f;
-                    } else {
-                        helmet = new ItemStack(Items.DIAMOND_HELMET);
-                    }
+                    if (for_head) {
+                        if (Math.random() < 0.25) {
+                            helmet = new ItemStack(Items.NETHERITE_HELMET);
+                            helmet_drop = -1.0f;
+                        } else {
+                            helmet = new ItemStack(Items.DIAMOND_HELMET);
+                        }
 
-                    helmet.enchant(
-                            entity.level().registryAccess()
-                                    .lookupOrThrow(Registries.ENCHANTMENT)
-                                    .getOrThrow(Enchantments.PROTECTION),
-                            Mth.nextInt(
-                                    entity.level().random,
-                                    3,
-                                    4
-                            )
-                    );
+                        helmet.enchant(
+                                entity.level().registryAccess()
+                                        .lookupOrThrow(Registries.ENCHANTMENT)
+                                        .getOrThrow(Enchantments.PROTECTION),
+                                Mth.nextInt(
+                                        entity.level().random,
+                                        3,
+                                        4
+                                )
+                        );
+                    }
 
                     // CHEST
-                    if (Math.random() < 0.25) {
-                        chest = new ItemStack(Items.NETHERITE_CHESTPLATE);
-                        chest_drop = -1.0f;
-                    } else {
-                        chest = new ItemStack(Items.DIAMOND_CHESTPLATE);
+                    if (for_chest) {
+                        if (Math.random() < 0.25) {
+                            chest = new ItemStack(Items.NETHERITE_CHESTPLATE);
+                            chest_drop = -1.0f;
+                        } else {
+                            chest = new ItemStack(Items.DIAMOND_CHESTPLATE);
+                        }
+
+                        chest.enchant(
+                                entity.level().registryAccess()
+                                        .lookupOrThrow(Registries.ENCHANTMENT)
+                                        .getOrThrow(Enchantments.PROTECTION),
+
+                                Mth.nextInt(
+                                        entity.level().random,
+                                        3,
+                                        4
+                                )
+                        );
                     }
-
-                    chest.enchant(
-                            entity.level().registryAccess()
-                                    .lookupOrThrow(Registries.ENCHANTMENT)
-                                    .getOrThrow(Enchantments.PROTECTION),
-
-                            Mth.nextInt(
-                                    entity.level().random,
-                                    3,
-                                    4
-                            )
-                    );
 
                     // LEG
-                    if (Math.random() < 0.25) {
-                        leg = new ItemStack(Items.NETHERITE_LEGGINGS);
-                        leg_drop = -1.0f;
-                    } else {
-                        leg = new ItemStack(Items.DIAMOND_LEGGINGS);
-                    }
+                    if (for_leg) {
+                        if (Math.random() < 0.25) {
+                            leg = new ItemStack(Items.NETHERITE_LEGGINGS);
+                            leg_drop = -1.0f;
+                        } else {
+                            leg = new ItemStack(Items.DIAMOND_LEGGINGS);
+                        }
 
-                    leg.enchant(
-                            entity.level().registryAccess()
-                                    .lookupOrThrow(Registries.ENCHANTMENT)
-                                    .getOrThrow(Enchantments.PROTECTION),
-                            Mth.nextInt(
-                                    entity.level().random,
-                                    3,
-                                    4
-                            )
-                    );
+                        leg.enchant(
+                                entity.level().registryAccess()
+                                        .lookupOrThrow(Registries.ENCHANTMENT)
+                                        .getOrThrow(Enchantments.PROTECTION),
+                                Mth.nextInt(
+                                        entity.level().random,
+                                        3,
+                                        4
+                                )
+                        );
+                    }
 
                     // BOOT
-                    if (Math.random() < 0.25) {
-                        boot = new ItemStack(Items.NETHERITE_BOOTS);
-                        boot_drop = -1.0f;
-                    } else {
-                        boot = new ItemStack(Items.DIAMOND_BOOTS);
-                    }
+                    if (for_boot) {
+                        if (Math.random() < 0.25) {
+                            boot = new ItemStack(Items.NETHERITE_BOOTS);
+                            boot_drop = -1.0f;
+                        } else {
+                            boot = new ItemStack(Items.DIAMOND_BOOTS);
+                        }
 
-                    leg.enchant(
-                            entity.level().registryAccess()
-                                    .lookupOrThrow(Registries.ENCHANTMENT)
-                                    .getOrThrow(Enchantments.PROTECTION),
-                            Mth.nextInt(
-                                    entity.level().random,
-                                    3,
-                                    4
-                            )
-                    );
+                        boot.enchant(
+                                entity.level().registryAccess()
+                                        .lookupOrThrow(Registries.ENCHANTMENT)
+                                        .getOrThrow(Enchantments.PROTECTION),
+                                Mth.nextInt(
+                                        entity.level().random,
+                                        3,
+                                        4
+                                )
+                        );
+                    }
 
                     if (!allDrop) {
                         helmet_drop = -1.0f;
@@ -122,91 +130,107 @@ public class ArmorEquipInRainWeather {
 
                 } else {
                     // HELMET
-                    if (Math.random() < 0.35) {
-                        helmet = new ItemStack(Items.DIAMOND_HELMET);
-                        if (!allDrop){helmet_drop = -1.0f;}
-                    } else if (Math.random() < 0.85) {
-                        helmet = new ItemStack(Items.IRON_HELMET);
-                    } else {
-                        helmet = new ItemStack(Items.NETHERITE_HELMET);
-                        helmet_drop = -1.0f;
-                    }
+                    if (for_head) {
+                        if (Math.random() < 0.35) {
+                            helmet = new ItemStack(Items.DIAMOND_HELMET);
+                            if (!allDrop) {
+                                helmet_drop = -1.0f;
+                            }
+                        } else if (Math.random() < 0.85) {
+                            helmet = new ItemStack(Items.IRON_HELMET);
+                        } else {
+                            helmet = new ItemStack(Items.NETHERITE_HELMET);
+                            helmet_drop = -1.0f;
+                        }
 
-                    helmet.enchant(
-                            entity.level().registryAccess()
-                                    .lookupOrThrow(Registries.ENCHANTMENT)
-                                    .getOrThrow(Enchantments.PROTECTION),
-                            Mth.nextInt(
-                                    entity.level().random,
-                                    2,
-                                    3
-                            )
-                    );
+                        helmet.enchant(
+                                entity.level().registryAccess()
+                                        .lookupOrThrow(Registries.ENCHANTMENT)
+                                        .getOrThrow(Enchantments.PROTECTION),
+                                Mth.nextInt(
+                                        entity.level().random,
+                                        2,
+                                        3
+                                )
+                        );
+                    }
 
                     // CHEST
-                    if (Math.random() < 0.35) {
-                        chest = new ItemStack(Items.DIAMOND_CHESTPLATE);
-                        if (!allDrop){chest_drop = -1.0f;}
-                    } else if (Math.random() < 0.85){
-                        chest = new ItemStack(Items.IRON_CHESTPLATE);
-                    } else {
-                        chest = new ItemStack(Items.NETHERITE_CHESTPLATE);
-                        chest_drop = -1.0f;
-                    }
+                    if (for_chest) {
+                        if (Math.random() < 0.35) {
+                            chest = new ItemStack(Items.DIAMOND_CHESTPLATE);
+                            if (!allDrop) {
+                                chest_drop = -1.0f;
+                            }
+                        } else if (Math.random() < 0.85) {
+                            chest = new ItemStack(Items.IRON_CHESTPLATE);
+                        } else {
+                            chest = new ItemStack(Items.NETHERITE_CHESTPLATE);
+                            chest_drop = -1.0f;
+                        }
 
-                    chest.enchant(
-                            entity.level().registryAccess()
-                                    .lookupOrThrow(Registries.ENCHANTMENT)
-                                    .getOrThrow(Enchantments.PROTECTION),
-                            Mth.nextInt(
-                                    entity.level().random,
-                                    2,
-                                    3
-                            )
-                    );
+                        chest.enchant(
+                                entity.level().registryAccess()
+                                        .lookupOrThrow(Registries.ENCHANTMENT)
+                                        .getOrThrow(Enchantments.PROTECTION),
+                                Mth.nextInt(
+                                        entity.level().random,
+                                        2,
+                                        3
+                                )
+                        );
+                    }
 
                     // LEG
-                    if (Math.random() < 0.35) {
-                        leg = new ItemStack(Items.DIAMOND_LEGGINGS);
-                        if (!allDrop){leg_drop = -1.0f;}
-                    } else if (Math.random() < 0.85){
-                        leg = new ItemStack(Items.IRON_LEGGINGS);
-                    } else {
-                        leg = new ItemStack(Items.NETHERITE_LEGGINGS);
-                        leg_drop = -1.0f;
+                    if (for_leg) {
+                        if (Math.random() < 0.35) {
+                            leg = new ItemStack(Items.DIAMOND_LEGGINGS);
+                            if (!allDrop) {
+                                leg_drop = -1.0f;
+                            }
+                        } else if (Math.random() < 0.85) {
+                            leg = new ItemStack(Items.IRON_LEGGINGS);
+                        } else {
+                            leg = new ItemStack(Items.NETHERITE_LEGGINGS);
+                            leg_drop = -1.0f;
+                        }
+                        leg.enchant(
+                                entity.level().registryAccess()
+                                        .lookupOrThrow(Registries.ENCHANTMENT)
+                                        .getOrThrow(Enchantments.PROTECTION),
+                                Mth.nextInt(
+                                        entity.level().random,
+                                        2,
+                                        3
+                                )
+                        );
                     }
-                    leg.enchant(
-                            entity.level().registryAccess()
-                                    .lookupOrThrow(Registries.ENCHANTMENT)
-                                    .getOrThrow(Enchantments.PROTECTION),
-                            Mth.nextInt(
-                                    entity.level().random,
-                                    2,
-                                    3
-                            )
-                    );
 
                     // BOOT
-                    if (Math.random() < 0.35) {
-                        boot = new ItemStack(Items.DIAMOND_BOOTS);
-                        if (!allDrop) {boot_drop = -1.0f;}
-                    } else if (Math.random() < 0.85) {
-                        boot = new ItemStack(Items.IRON_BOOTS);
-                    } else {
-                        boot = new ItemStack(Items.NETHERITE_BOOTS);
-                        boot_drop = -1.0f;
-                    }
+                    if (for_boot) {
+                        if (Math.random() < 0.35) {
+                            boot = new ItemStack(Items.DIAMOND_BOOTS);
+                            if (!allDrop) {
+                                boot_drop = -1.0f;
+                            }
+                        } else if (Math.random() < 0.85) {
+                            boot = new ItemStack(Items.IRON_BOOTS);
+                        } else {
+                            boot = new ItemStack(Items.NETHERITE_BOOTS);
+                            boot_drop = -1.0f;
+                        }
 
-                    boot.enchant(
-                            entity.level().registryAccess()
-                                    .lookupOrThrow(Registries.ENCHANTMENT)
-                                    .getOrThrow(Enchantments.PROTECTION),
-                            Mth.nextInt(
-                                    entity.level().random,
-                                    2,
-                                    3
-                            )
-                    );
+                        boot.enchant(
+                                entity.level().registryAccess()
+                                        .lookupOrThrow(Registries.ENCHANTMENT)
+                                        .getOrThrow(Enchantments.PROTECTION),
+                                Mth.nextInt(
+                                        entity.level().random,
+                                        2,
+                                        3
+                                )
+                        );
+                    }
                 }
                 if (entity instanceof LivingEntity livingEntity) {
                     livingEntity.setItemSlot(EquipmentSlot.HEAD, helmet);

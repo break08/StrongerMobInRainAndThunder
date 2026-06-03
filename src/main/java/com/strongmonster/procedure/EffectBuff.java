@@ -17,7 +17,7 @@ public class EffectBuff {
 
         boolean isRain = entity.level().isRaining();
 
-        if (!(((BuffAccess) entity).getBuff())){
+        if (((BuffAccess) entity).getBuff()){
             if (isRain){
                 if (entity instanceof LivingEntity livingEntity && !livingEntity.level().isClientSide()){
                     livingEntity.addEffect(new MobEffectInstance(MobEffects.STRENGTH, 28800, Mth.nextInt(RandomSource.create(), 2, 3)));
