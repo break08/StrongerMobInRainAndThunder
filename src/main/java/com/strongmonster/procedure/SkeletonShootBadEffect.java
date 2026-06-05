@@ -1,9 +1,7 @@
 package com.strongmonster.procedure;
 
-import com.strongmonster.TheRiseOfHostile;
 import com.strongmonster.datagen.tag.TheRiseOfHostileEntityTag;
-import com.strongmonster.effect.CurseOfUndead;
-import com.strongmonster.effect.CurseOfUndeadRegister;
+import com.strongmonster.effect.TheRiseOfHostileMobEffect;
 import com.strongmonster.item.TheRiseOfHostileItem;
 import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
 import net.minecraft.core.Holder;
@@ -28,7 +26,7 @@ public class SkeletonShootBadEffect {
             MobEffects.WITHER,
             MobEffects.NAUSEA,
             MobEffects.INSTANT_DAMAGE,
-            CurseOfUndeadRegister.CURSE_OF_UNDEAD
+            TheRiseOfHostileMobEffect.CURSE_OF_UNDEAD
     );
     private static void badEffectGive(){
         ServerLivingEntityEvents.AFTER_DAMAGE.register(

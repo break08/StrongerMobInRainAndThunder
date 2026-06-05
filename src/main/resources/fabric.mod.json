@@ -18,7 +18,7 @@
 		"main": [
 			"com.strongmonster.TheRiseOfHostile",
 			"com.strongmonster.game_rule.TheRiseOfHostileGameRule",
-			"com.strongmonster.effect.CurseOfUndeadRegister"
+          "com.strongmonster.effect.TheRiseOfHostileMobEffect"
 
 		],
 		"client": [

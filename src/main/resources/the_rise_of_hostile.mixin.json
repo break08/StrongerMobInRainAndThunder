@@ -7,7 +7,8 @@
     "private_access.KillerBunnyMixin",
     "ZombieRangedAttack",
     "nbt_mix.GiveBuff",
-    "nbt_mix.GiveCool"
+    "nbt_mix.GiveCool",
+    "AttributeBuff"
   ],
   "injectors": {
     "defaultRequire": 1

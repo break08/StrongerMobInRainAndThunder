@@ -21,6 +21,9 @@ public class TheRiseOfHostileEntityTag extends FabricTagProvider.EntityTypeTagPr
 
     public static final TagKey<EntityType<?>> ARMOR_EQUIP_BUFF = TagKey.create(Registries.ENTITY_TYPE, Identifier.fromNamespaceAndPath(TheRiseOfHostile.MOD_ID, "armor_buff"));
 
+    public static final TagKey<EntityType<?>> HOSTILE = TagKey.create(Registries.ENTITY_TYPE, Identifier.fromNamespaceAndPath(TheRiseOfHostile.MOD_ID, "hostile_all"));
+
+    public static final TagKey<EntityType<?>> TWENTY_HEALTH = TagKey.create(Registries.ENTITY_TYPE, Identifier.fromNamespaceAndPath(TheRiseOfHostile.MOD_ID, "twenty_health"));
 
     public TheRiseOfHostileEntityTag(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
         super(output, registriesFuture);
@@ -44,5 +47,24 @@ public class TheRiseOfHostileEntityTag extends FabricTagProvider.EntityTypeTagPr
                 .addTag(SKELETON_BUFF)
                 .addTag(ZOMBIE_BUFF)
                 .add(EntityType.DROWNED);
+        valueLookupBuilder(HOSTILE)
+                .addTag(ARMOR_EQUIP_BUFF)
+                .add(EntityType.PILLAGER)
+                .add(EntityType.VINDICATOR)
+                .add(EntityType.EVOKER)
+                .add(EntityType.VEX)
+                .add(EntityType.RAVAGER)
+                .add(EntityType.WITCH)
+                .add(EntityType.SPIDER)
+                .add(EntityType.CAVE_SPIDER);
+        valueLookupBuilder(TWENTY_HEALTH)
+                .add(EntityType.PIGLIN_BRUTE)
+                .addTag(ZOMBIE_BUFF)
+                .addTag(SKELETON_BUFF)
+                .add(EntityType.DROWNED)
+                .add(EntityType.WITHER_SKELETON)
+                .add(EntityType.CREEPER)
+                .add(EntityType.BLAZE)
+                .add(EntityType.PHANTOM);
     }
 }
