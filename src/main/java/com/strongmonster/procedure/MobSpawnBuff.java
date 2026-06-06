@@ -3,17 +3,19 @@ package com.strongmonster.procedure;
 import com.strongmonster.datagen.tag.TheRiseOfHostileEntityTag;
 import com.strongmonster.game_rule.TheRiseOfHostileGameRule;
 import com.strongmonster.mixin.nbt_mix.BuffAccess;
-import com.strongmonster.mixin.private_access.CreeperMixin;
-import com.strongmonster.mixin.private_access.KillerBunnyMixin;
 
 import com.strongmonster.mixin.nbt_mix.SpecialBuffAccess;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerEntityEvents;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.animal.rabbit.Rabbit;
 import net.minecraft.world.entity.monster.Creeper;
+import net.minecraft.world.entity.monster.spider.CaveSpider;
+import net.minecraft.world.entity.monster.spider.Spider;
 import net.minecraft.world.entity.monster.zombie.Drowned;
 import net.minecraft.world.entity.monster.zombie.Husk;
 import net.minecraft.world.entity.player.Player;
@@ -21,6 +23,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
 
 import java.lang.Math;
 
@@ -46,7 +49,7 @@ public class MobSpawnBuff {
             ItemStack main_hand = ItemStack.EMPTY;
 
             // Start if isRain true
-            if (isRain) {
+            if (isRain && entity instanceof LivingEntity livingEntity) {
                 if (entity.getType().is(TheRiseOfHostileEntityTag.ZOMBIE_BUFF)) {
                     if (Math.random() < 0.65) {
                         int value =
@@ -94,25 +97,18 @@ public class MobSpawnBuff {
                                             .getOrThrow(Enchantments.SHARPNESS),
                                     5
                             );
-                            if (entity instanceof LivingEntity living_entity) {
-                                living_entity.setItemInHand(InteractionHand.MAIN_HAND, main_hand.copy());
-                                if (entity instanceof Player player) {
-                                    player.getInventory().setChanged();
+                            livingEntity.setItemInHand(InteractionHand.MAIN_HAND, main_hand.copy());
+                            if (entity instanceof Player player) {
+                                player.getInventory().setChanged();
                                 }
-                            }
                             if (entity instanceof Husk && Math.random() < 0.5) {
                                 Rabbit killer_bunny = EntityType.RABBIT.create(level, EntitySpawnReason.NATURAL);
 
                                 assert killer_bunny != null;
-                                killer_bunny.getEntityData().set(
-                                        KillerBunnyMixin.setVariant(),
-                                        99
-                                );
+                                killer_bunny.setVariant(Rabbit.Variant.EVIL);
 
-                                if (killer_bunny != null) {
-                                    killer_bunny.setYRot(world.getRandom().nextFloat() * 360F);
-                                    entity.level().addFreshEntity(killer_bunny);
-                                }
+                                killer_bunny.setPos(entity.position());
+                                entity.level().addFreshEntity(killer_bunny);
                             }
                         } else {
                             if (value == 1 || value == 2 || value == 3) {
@@ -159,13 +155,9 @@ public class MobSpawnBuff {
                                             2
                                     )
                             );
-
-
-                            if (entity instanceof LivingEntity living_entity) {
-                                living_entity.setItemInHand(InteractionHand.MAIN_HAND, main_hand.copy());
-                                if (entity instanceof Player player) {
-                                    player.getInventory().setChanged();
-                                }
+                            livingEntity.setItemInHand(InteractionHand.MAIN_HAND, main_hand.copy());
+                            if (entity instanceof Player player) {
+                                player.getInventory().setChanged();
                             }
                         }
                     } else {
@@ -230,26 +222,42 @@ public class MobSpawnBuff {
                                     1
                             );
                         }
-                        if (entity instanceof LivingEntity living_entity) {
-                            living_entity.setItemInHand(InteractionHand.MAIN_HAND, main_hand.copy());
-                            if (entity instanceof Player player) {
-                                player.getInventory().setChanged();
-                            }
+                        livingEntity.setItemInHand(InteractionHand.MAIN_HAND, main_hand.copy());
+                        if (entity instanceof Player player) {
+                            player.getInventory().setChanged();
                         }
+
                     } else {
                         ((SpecialBuffAccess) entity).setSBuff(true);
                         SpecialBuff.run(entity);
                     }
                 } else if (entity instanceof Creeper creeper && isThunder && Math.random() < 0.5) {
-                    creeper.getEntityData().set(
-                            CreeperMixin.getDataIsPowered(),
-                            true
-                    );
+                    creeper.getEntityData().set(Creeper.DATA_IS_POWERED, true);
                     ((BuffAccess) entity).setBuff(true);
                 } else if (entity instanceof Drowned) {
                     ((BuffAccess) entity).setBuff(true);
+                } else if (entity instanceof Spider && !(entity instanceof CaveSpider)){
+                    if (Math.random() < 0.25){
+                        Vec3 pos = entity.position();
+                        entity.discard();
+                        CaveSpider caveSpider = EntityType.CAVE_SPIDER.create(level, EntitySpawnReason.NATURAL);
+                        if (!(caveSpider ==null)){
+                            caveSpider.setPos(pos);
+                            world.addFreshEntity(caveSpider);
+                        }
+                    } else {
+                        ((BuffAccess) entity).setBuff(true);
+                        if (Math.random() < 0.25) {
+                            livingEntity.addEffect(new MobEffectInstance(MobEffects.INVISIBILITY, 1728000, 0));
+                        }
+                    }
+                } else if (entity instanceof CaveSpider){
+                    ((BuffAccess) entity).setBuff(true);
+                    if (Math.random() < 0.12){
+                        livingEntity.addEffect(new MobEffectInstance(MobEffects.INVISIBILITY, 1728000, 0));
+                    }
                 }
-                EffectBuff.run(level, entity);
+                EffectBuff.run(entity);
                 if (((BuffAccess) entity).getBuff()) {
                     ArmorEquipInRainWeather.ArmorEquipSpecialCase(entity, true, true, true, true);
                 }

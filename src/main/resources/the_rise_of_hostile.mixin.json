@@ -8,7 +8,10 @@
     "ZombieRangedAttack",
     "nbt_mix.GiveBuff",
     "nbt_mix.GiveCool",
-    "AttributeBuff"
+    "AttributeBuff",
+    "nbt_mix.GiveSpecialBuff",
+    "SpiderContinueToUseMixin",
+    "SpiderCanUseMixin"
   ],
   "injectors": {
     "defaultRequire": 1

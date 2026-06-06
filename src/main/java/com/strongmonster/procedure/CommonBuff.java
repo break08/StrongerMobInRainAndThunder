@@ -7,14 +7,17 @@ import com.strongmonster.mixin.nbt_mix.SpecialBuffAccess;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerEntityEvents;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.util.Mth;
-import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.Mob;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.monster.spider.CaveSpider;
+import net.minecraft.world.entity.monster.spider.Spider;
 import net.minecraft.world.entity.monster.zombie.Drowned;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
 
 public class CommonBuff {
     public static void register() {
@@ -27,7 +30,7 @@ public class CommonBuff {
             ItemStack main_hand = ItemStack.EMPTY;
             float mainhand_drop = 0.085f;
 
-            if (!(entity.level().isRaining())) {
+            if (!(entity.level().isRaining()) && entity instanceof LivingEntity livingEntity) {
                 Level level = entity.level();
                 boolean allDrop = world.getGameRules().get(TheRiseOfHostileGameRule.ALL_DIAMOND_GEAR_DROP_GAMERULE);
 
@@ -125,11 +128,30 @@ public class CommonBuff {
                                     1
                             );
                         }
+                    } else if (entity instanceof Spider && !(entity instanceof CaveSpider)){
+                        ((BuffAccess) entity).setBuff(true);
+                        if (Math.random() < 0.25){
+                            Vec3 pos = entity.position();
+                            entity.discard();
+                            CaveSpider caveSpider = EntityType.CAVE_SPIDER.create(level, EntitySpawnReason.NATURAL);
+                            if (!(caveSpider ==null)){
+                                caveSpider.setPos(pos);
+                                world.addFreshEntity(caveSpider);
+                            }
+                        } else {
+                            if (Math.random() < 0.25) {
+                                livingEntity.addEffect(new MobEffectInstance(MobEffects.INVISIBILITY, 1728000, 0));
+                            }
+                        }
+                    } else if (entity instanceof CaveSpider){
+                        ((BuffAccess) entity).setBuff(true);
+                        if (Math.random() < 0.12){
+                            livingEntity.addEffect(new MobEffectInstance(MobEffects.INVISIBILITY, 1728000, 0));
+                        }
                     }
                 } else {
                     ((SpecialBuffAccess) entity).setSBuff(true);
                 }
-
                 if (entity instanceof Drowned) {
                     ((BuffAccess) entity).setBuff(true);
                 }
@@ -137,10 +159,8 @@ public class CommonBuff {
                 if (((BuffAccess) entity).getBuff()) {
                     ArmorEquipCommon.CommonEquip(entity, true, true, true, true);
                 }
-                EffectBuff.run(entity.level(), entity);
-                if (entity instanceof LivingEntity livingEntity) {
-                    livingEntity.setItemSlot(EquipmentSlot.MAINHAND, main_hand);
-                }
+                EffectBuff.run(entity);
+                livingEntity.setItemSlot(EquipmentSlot.MAINHAND, main_hand);
                 if (entity instanceof Mob mob) {
                     mob.setDropChance(EquipmentSlot.MAINHAND, mainhand_drop);
                 }
