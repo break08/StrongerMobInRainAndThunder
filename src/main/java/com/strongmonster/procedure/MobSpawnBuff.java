@@ -49,7 +49,7 @@ public class MobSpawnBuff {
             ItemStack main_hand = ItemStack.EMPTY;
 
             // Start if isRain true
-            if (isRain && entity instanceof LivingEntity livingEntity) {
+            if (isRain && entity instanceof Mob livingEntity) {
                 if (entity.getType().is(TheRiseOfHostileEntityTag.ZOMBIE_BUFF)) {
                     if (Math.random() < 0.65) {
                         int value =

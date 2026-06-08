@@ -5,6 +5,7 @@ import com.strongmonster.datagen.tag.TheRiseOfHostileEntityTag;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.monster.piglin.PiglinBrute;
 import net.minecraft.world.level.ServerLevelAccessor;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -22,6 +23,9 @@ public class AttributeBuff {
             ModHelper.randomAttributeDoubleTypePlus(0, 0.2, Attributes.MOVEMENT_SPEED, livingEntity);
             ModHelper.plusRandomValueToIntAttribute(7, 12, Attributes.FOLLOW_RANGE, livingEntity);
             ModHelper.plusRandomValueToIntAttribute(1, 2, Attributes.ATTACK_DAMAGE, livingEntity);
+        }
+        if (entity instanceof PiglinBrute){
+            ((PiglinBrute) entity).setImmuneToZombification(true);
         }
     }
 }

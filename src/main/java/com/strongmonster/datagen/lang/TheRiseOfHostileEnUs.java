@@ -12,7 +12,7 @@ import com.strongmonster.TheRiseOfHostile;
 import net.minecraft.util.Util;
 
 public class TheRiseOfHostileEnUs extends FabricLanguageProvider {
-    protected TheRiseOfHostileEnUs(FabricDataOutput dataOutput, CompletableFuture<HolderLookup.Provider> registryLookup) {
+    public TheRiseOfHostileEnUs(FabricDataOutput dataOutput, CompletableFuture<HolderLookup.Provider> registryLookup) {
         // Specifying en_us is optional, as it's the default language code
         super(dataOutput, "en_us", registryLookup);
     }

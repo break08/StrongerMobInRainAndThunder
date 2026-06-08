@@ -30,7 +30,7 @@ public class CommonBuff {
             ItemStack main_hand = ItemStack.EMPTY;
             float mainhand_drop = 0.085f;
 
-            if (!(entity.level().isRaining()) && entity instanceof LivingEntity livingEntity) {
+            if (!(entity.level().isRaining()) && entity instanceof Mob livingEntity) {
                 Level level = entity.level();
                 boolean allDrop = world.getGameRules().get(TheRiseOfHostileGameRule.ALL_DIAMOND_GEAR_DROP_GAMERULE);
 

@@ -3,15 +3,14 @@
   "package": "com.strongmonster.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
-    "private_access.CreeperMixin",
-    "private_access.KillerBunnyMixin",
     "ZombieRangedAttack",
     "nbt_mix.GiveBuff",
     "nbt_mix.GiveCool",
     "AttributeBuff",
     "nbt_mix.GiveSpecialBuff",
     "SpiderContinueToUseMixin",
-    "SpiderCanUseMixin"
+    "SpiderCanUseMixin",
+    "ZombieNotBeAttractedByTurtleEgg"
   ],
   "injectors": {
     "defaultRequire": 1

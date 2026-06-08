@@ -3,9 +3,8 @@ package com.strongmonster.game_rule;
 import com.strongmonster.TheRiseOfHostile;
 import com.strongmonster.datagen.tag.TheRiseOfHostileEntityTag;
 
-// Head lib
-import com.strongmonster.head_lib.CustomGetScoreboard;
-
+import com.strongmonster.mixin.nbt_mix.BuffAccess;
+import com.strongmonster.mixin.nbt_mix.SpecialBuffAccess;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.entity.event.v1.ServerEntityCombatEvents;
 import net.fabricmc.fabric.api.event.player.UseBlockCallback;
@@ -99,15 +98,14 @@ public class TheRiseOfHostileGameRule implements ModInitializer {
                             world.getGameRules().get(TheRiseOfHostileGameRule.BONUS_EXP);
 
                     BlockPos entityRipPos = killedEntity.blockPosition();
-                    Entity attacker = damageSource.getEntity();
 
-                    // Scoreboard Check
-                    int isBuff = CustomGetScoreboard.getScoreBoard(entity, "buff");
-                    int isSpecialBuff = CustomGetScoreboard.getScoreBoard(entity, "special_buff");
+                    // NBT Check
+                    boolean isBuff = ((BuffAccess) killedEntity).getBuff();
+                    boolean isSpecialBuff = ((SpecialBuffAccess) killedEntity).getSBuff();
 
                     if (
-                            attacker instanceof Player player
-                                    && (isBuff == 1 || isSpecialBuff == 1)
+                            entity instanceof Player
+                                    && (isBuff || isSpecialBuff)
                                     && bonusDrop
                     ) {
 
@@ -243,7 +241,7 @@ public class TheRiseOfHostileGameRule implements ModInitializer {
                                 _level.addFreshEntity(entityToSpawn_18);
                             }
                         }
-                        if (world instanceof ServerLevel serverLevel) {
+                        if (world instanceof ServerLevel serverLevel && bonusExp) {
                             ExperienceOrb experienceOrb = new ExperienceOrb(killedEntity.level(), killedEntity.position(), Vec3.ZERO, 10);
                             serverLevel.addFreshEntity(experienceOrb);
                         }
