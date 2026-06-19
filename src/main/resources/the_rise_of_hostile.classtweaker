@@ -8,3 +8,7 @@ accessible method net/minecraft/world/entity/monster/zombie/Zombie addBehaviourG
 accessible field net/minecraft/world/entity/Mob goalSelector Lnet/minecraft/world/entity/ai/goal/GoalSelector;
 accessible field net/minecraft/world/entity/Mob targetSelector Lnet/minecraft/world/entity/ai/goal/GoalSelector;
 accessible field net/minecraft/world/entity/monster/zombie/Zombie canBreakDoors Z
+accessible class net/minecraft/world/entity/raid/Raider$HoldGroundAttackGoal
+accessible method net/minecraft/world/entity/monster/illager/AbstractIllager registerGoals ()V
+accessible class net/minecraft/world/entity/monster/illager/Vindicator$VindicatorBreakDoorGoal
+accessible class net/minecraft/world/entity/monster/illager/Vindicator$VindicatorJohnnyAttackGoal
