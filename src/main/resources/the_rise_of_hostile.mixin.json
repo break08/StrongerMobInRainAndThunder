@@ -4,6 +4,8 @@
   "compatibilityLevel": "JAVA_21",
   "mixins": [
     "AttributeBuff",
+    "CreeperNoAvoidCat",
+    "HostileNoFightBack",
     "PillagerNoAvoidCreaking",
     "SpiderCanUseMixin",
     "SpiderContinueToUseMixin",

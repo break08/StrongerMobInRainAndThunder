@@ -29,14 +29,14 @@ public abstract class VindicatorNoAvoidCreaking extends AbstractIllager {
         super.registerGoals();
         this.goalSelector.addGoal(0, new FloatGoal(this));
         this.goalSelector.addGoal(2, new Vindicator.VindicatorBreakDoorGoal(this));
-        this.goalSelector.addGoal(3, new AbstractIllager.RaiderOpenDoorGoal(this, this));
+        this.goalSelector.addGoal(3, new AbstractIllager.RaiderOpenDoorGoal(this));
         this.goalSelector.addGoal(4, new Raider.HoldGroundAttackGoal(this, 10.0F));
-        this.goalSelector.addGoal(5, new MeleeAttackGoal(this, (double)1.0F, false));
-        this.targetSelector.addGoal(1, (new HurtByTargetGoal(this, new Class[]{Raider.class})).setAlertOthers(new Class[0]));
+        this.goalSelector.addGoal(5, new MeleeAttackGoal(this, 1.0F, false));
+        this.targetSelector.addGoal(1, (new HurtByTargetGoal(this, Raider.class)).setAlertOthers());
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, true));
         this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, AbstractVillager.class, true));
         this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, IronGolem.class, true));
-        this.targetSelector.addGoal(4, new Vindicator.VindicatorJohnnyAttackGoal(this));
+        this.targetSelector.addGoal(4, new Vindicator.VindicatorJohnnyAttackGoal((Vindicator)(Object)this));
         this.goalSelector.addGoal(8, new RandomStrollGoal(this, 0.6));
         this.goalSelector.addGoal(9, new LookAtPlayerGoal(this, Player.class, 3.0F, 1.0F));
         this.goalSelector.addGoal(10, new LookAtPlayerGoal(this, Mob.class, 8.0F));
