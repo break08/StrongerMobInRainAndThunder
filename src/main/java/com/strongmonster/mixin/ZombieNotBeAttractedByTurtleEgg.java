@@ -27,11 +27,11 @@ public class ZombieNotBeAttractedByTurtleEgg {
     @Inject(method = "addBehaviourGoals", at = @At("HEAD"), cancellable = true)
     private void addBehaviourGoals(CallbackInfo ci){
         Zombie entity = (Zombie)(Object)this;
-        entity.goalSelector.addGoal(2, new SpearUseGoal<>(entity, (double)1.0F, (double)1.0F, 10.0F, 2.0F));
-        entity.goalSelector.addGoal(3, new ZombieAttackGoal(entity, (double)1.0F, false));
-        entity.goalSelector.addGoal(6, new MoveThroughVillageGoal(entity, (double)1.0F, true, 4, () -> entity.canBreakDoors));
-        entity.goalSelector.addGoal(7, new WaterAvoidingRandomStrollGoal(entity, (double)1.0F));
-        entity.targetSelector.addGoal(1, (new HurtByTargetGoal(entity, new Class[0])).setAlertOthers(new Class[]{ZombifiedPiglin.class}));
+        entity.goalSelector.addGoal(2, new SpearUseGoal<>(entity, 1.0F, 1.0F, 10.0F, 2.0F));
+        entity.goalSelector.addGoal(3, new ZombieAttackGoal(entity, 1.0F, false));
+        entity.goalSelector.addGoal(6, new MoveThroughVillageGoal(entity, 1.0F, true, 4, () -> entity.canBreakDoors));
+        entity.goalSelector.addGoal(7, new WaterAvoidingRandomStrollGoal(entity, 1.0F));
+        entity.targetSelector.addGoal(1, (new HurtByTargetGoal(entity)).setAlertOthers(ZombifiedPiglin.class));
         entity.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(entity, Player.class, true));
         entity.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(entity, AbstractVillager.class, false));
         entity.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(entity, IronGolem.class, true));

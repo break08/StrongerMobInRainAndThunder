@@ -4,8 +4,8 @@ import com.strongmonster.datagen.tag.TheRiseOfHostileEntityTag;
 import com.strongmonster.datagen.tag.TheRiseOfHostileItemTag;
 
 import com.strongmonster.item.TheRiseOfHostileItem;
-import com.strongmonster.mixin.nbt_mix.CoolAccess;
-import com.strongmonster.mixin.nbt_mix.SpecialBuffAccess;
+import com.strongmonster.access.CoolAccess;
+import com.strongmonster.access.SpecialBuffAccess;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
@@ -14,7 +14,6 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.level.Level;
 
 public class SpecialBuff {
     public static void run (Entity entity){

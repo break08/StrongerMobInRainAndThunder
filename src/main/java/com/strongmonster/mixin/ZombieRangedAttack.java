@@ -2,8 +2,8 @@ package com.strongmonster.mixin;
 
 import com.strongmonster.datagen.tag.TheRiseOfHostileItemTag;
 
-import com.strongmonster.mixin.nbt_mix.CoolAccess;
-import com.strongmonster.mixin.nbt_mix.SpecialBuffAccess;
+import com.strongmonster.access.CoolAccess;
+import com.strongmonster.access.SpecialBuffAccess;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.monster.zombie.Zombie;
 import net.minecraft.world.entity.projectile.hurtingprojectile.SmallFireball;

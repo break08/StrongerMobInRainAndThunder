@@ -1,5 +1,6 @@
 package com.strongmonster.mixin.nbt_mix;
 
+import com.strongmonster.access.SpecialBuffAccess;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.level.Level;
@@ -11,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(Mob.class)
-public class GiveSpecialBuff implements SpecialBuffAccess{
+public class GiveSpecialBuff implements SpecialBuffAccess {
     private boolean sbuff;
 
     @Override

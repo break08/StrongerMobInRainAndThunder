@@ -1,6 +1,6 @@
 package com.strongmonster.procedure;
 
-import com.strongmonster.mixin.nbt_mix.BuffAccess;
+import com.strongmonster.access.BuffAccess;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 
@@ -8,7 +8,6 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.level.Level;
 
 public class EffectBuff {
     public static void run(Entity entity) {

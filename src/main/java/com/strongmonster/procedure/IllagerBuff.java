@@ -1,8 +1,8 @@
 package com.strongmonster.procedure;
 
 import com.strongmonster.game_rule.TheRiseOfHostileGameRule;
-import com.strongmonster.mixin.nbt_mix.BuffAccess;
-import com.strongmonster.mixin.nbt_mix.SpecialBuffAccess;
+import com.strongmonster.access.BuffAccess;
+import com.strongmonster.access.SpecialBuffAccess;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerEntityEvents;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.InteractionHand;

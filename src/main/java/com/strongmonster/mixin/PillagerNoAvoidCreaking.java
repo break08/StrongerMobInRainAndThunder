@@ -13,6 +13,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.raid.Raider;
 import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -24,9 +25,13 @@ public abstract class PillagerNoAvoidCreaking extends AbstractIllager {
       super(entityType, level);
     }
 
-    @Inject(method = "registerGoals", at = @At("HEAD"), cancellable = true)
-    private void registerGoals (CallbackInfo ci){
-        ci.cancel();
+    /**
+     * @author break08
+     * @reason Make Pillager not to avoid Creaking
+     */
+
+    @Overwrite
+    public void registerGoals (){
         super.registerGoals();
         this.goalSelector.addGoal(0, new FloatGoal(this));
         this.goalSelector.addGoal(2, new Raider.HoldGroundAttackGoal(this, 10.0F));

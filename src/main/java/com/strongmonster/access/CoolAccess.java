@@ -1,4 +1,4 @@
-package com.strongmonster.mixin.nbt_mix;
+package com.strongmonster.access;
 
 public interface CoolAccess {
     int getCool();

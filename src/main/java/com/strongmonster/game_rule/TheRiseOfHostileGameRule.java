@@ -3,8 +3,8 @@ package com.strongmonster.game_rule;
 import com.strongmonster.TheRiseOfHostile;
 import com.strongmonster.datagen.tag.TheRiseOfHostileEntityTag;
 
-import com.strongmonster.mixin.nbt_mix.BuffAccess;
-import com.strongmonster.mixin.nbt_mix.SpecialBuffAccess;
+import com.strongmonster.access.BuffAccess;
+import com.strongmonster.access.SpecialBuffAccess;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.entity.event.v1.ServerEntityCombatEvents;
 import net.fabricmc.fabric.api.event.player.UseBlockCallback;
@@ -17,7 +17,6 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.ExperienceOrb;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.monster.Creeper;
