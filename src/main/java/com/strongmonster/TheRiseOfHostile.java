@@ -25,12 +25,9 @@ public class TheRiseOfHostile implements ModInitializer {
 		TheRiseOfHostileItem.initialize();
 
 		// Procedure Register
-		MobSpawnBuff.register();
-		IllagerBuff.register();
 		AntiIronGolemCheating.register();
 		BadEffectToTarget.register();
-		DynamiteExplode.register();
-		CommonBuff.register();
+		DynamiteExplode.register();;
 		SkeletonShootBadEffect.register();
 
 		// Particle

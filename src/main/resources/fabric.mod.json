@@ -18,7 +18,7 @@
 		"main": [
 			"com.strongmonster.TheRiseOfHostile",
 			"com.strongmonster.game_rule.TheRiseOfHostileGameRule",
-          "com.strongmonster.effect.TheRiseOfHostileMobEffect"
+            "com.strongmonster.effect.TheRiseOfHostileMobEffect"
 
 		],
 		"client": [
@@ -26,16 +26,17 @@
 		],
 		"modmenu": [
 			"com.strongmonster.client.config.AddToModMenu"
+		],
+		"fabric-datagen": [
+			"com.strongmonster.datagen.TheRiseOfHostileDataGenerator"
 		]
 	},
-	"fabric-datagen": [
-		"com.strongmonster.datagen.TheRiseOfHostileDataGenerator"
-	],
 	"mixins": [
-		"the_rise_of_hostile.mixin.json"
-	],
-	"client": [
-		"the_rise_of_hostile.client.mixin.json"
+		"the_rise_of_hostile.mixins.json",
+		{
+			"config": "the_rise_of_hostile.client.mixins.json",
+			"environment": "client"
+		}
 	],
 	"depends": {
 		"fabricloader": ">=0.19.2",

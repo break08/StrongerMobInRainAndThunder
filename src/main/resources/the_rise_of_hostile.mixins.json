@@ -1,0 +1,28 @@
+{
+  "required": true,
+  "package": "com.strongmonster.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "AttributeBuff",
+    "BuffOnSpawn",
+    "CreeperNoAvoidCat",
+    "DataSaver",
+    "HostileNoFightBack",
+    "IllusionerSpawnWithPillager",
+    "PillagerNoAvoidCreaking",
+    "SpiderCanUseMixin",
+    "SpiderContinueToUseMixin",
+    "VindicatorNoAvoidCreaking",
+    "ZombieNotBeAttractedByTurtleEgg",
+    "ZombieRangedAttack",
+    "nbt_mix.GiveBuff",
+    "nbt_mix.GiveCool",
+    "nbt_mix.GiveSpecialBuff"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "overwrites": {
+    "requireAnnotations": true
+  }
+}

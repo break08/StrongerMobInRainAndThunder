@@ -1,0 +1,14 @@
+{
+  "values": [
+    "#the_rise_of_hostile:armor_buff",
+    "minecraft:pillager",
+    "minecraft:vindicator",
+    "minecraft:evoker",
+    "minecraft:vex",
+    "minecraft:ravager",
+    "minecraft:witch",
+    "minecraft:spider",
+    "minecraft:cave_spider",
+    "minecraft:creeper"
+  ]
+}

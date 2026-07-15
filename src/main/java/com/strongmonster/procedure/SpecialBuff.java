@@ -17,7 +17,7 @@ import net.minecraft.world.item.Items;
 
 public class SpecialBuff {
     public static void run (Entity entity){
-        if (((SpecialBuffAccess) entity).getSBuff() && entity instanceof LivingEntity living_entity) {
+        if (entity instanceof SpecialBuffAccess && ((SpecialBuffAccess) entity).getSBuff() && entity instanceof LivingEntity living_entity) {
             if (entity.getType().is(TheRiseOfHostileEntityTag.ZOMBIE_BUFF)) {
                 if (Math.random() < 0.2) {
                     living_entity.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(BuiltInRegistries.ITEM.getRandomElementOf(TheRiseOfHostileItemTag.IS_THROWABLE, RandomSource.create()).orElseGet(() -> BuiltInRegistries.ITEM.wrapAsHolder(Items.AIR)).value()));

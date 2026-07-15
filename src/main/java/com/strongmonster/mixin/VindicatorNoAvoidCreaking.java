@@ -6,7 +6,6 @@ import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.animal.golem.IronGolem;
-import net.minecraft.world.entity.monster.creaking.Creaking;
 import net.minecraft.world.entity.monster.illager.AbstractIllager;
 import net.minecraft.world.entity.monster.illager.Vindicator;
 import net.minecraft.world.entity.npc.villager.AbstractVillager;

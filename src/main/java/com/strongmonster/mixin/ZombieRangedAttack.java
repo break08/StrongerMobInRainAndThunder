@@ -26,6 +26,7 @@ public class ZombieRangedAttack {
                 && entity instanceof LivingEntity livingEntity
                 && !livingEntity.level().isClientSide()
                 && ((CoolAccess) entity).getCool() == 0
+                && entity instanceof SpecialBuffAccess
                 && ((SpecialBuffAccess) entity).getSBuff()
         ) {
             for (int i = 0; i < 5; i++) {
@@ -41,23 +42,23 @@ public class ZombieRangedAttack {
                 );
                 if (entity.getOffhandItem().is(Items.FIRE_CHARGE)) {
                     SmallFireball projectile = new SmallFireball(entity.level(), entity, vec3.normalize());
-                    projectile.setPos(projectile.getX(), entity.getY(0.5F) + 0.5F, projectile.getZ());
+                    projectile.setPos(entity.getX(), entity.getY(0.5F) + 0.5F, entity.getZ());
 
                     livingEntity.level().addFreshEntity(projectile);
                 } else if (entity.getOffhandItem().is(Items.WITHER_SKELETON_SKULL)) {
                     WitherSkull projectile = new WitherSkull(entity.level(), entity, vec3.normalize());
-                    projectile.setPos(projectile.getX(), entity.getY(0.5F) + 0.5F, projectile.getZ());
+                    projectile.setPos(entity.getX(), entity.getY(0.5F) + 0.5F, entity.getZ());
 
                     livingEntity.level().addFreshEntity(projectile);
                 } else if (entity.getOffhandItem().is(Items.DRAGON_BREATH)) {
                     DragonFireball projectile = new DragonFireball(entity.level(), entity, vec3.normalize());
-                    projectile.setPos(projectile.getX(), entity.getY(0.5F) + 0.5F, projectile.getZ());
+                    projectile.setPos(entity.getX(), entity.getY(0.5F) + 0.5F, entity.getZ());
 
                     livingEntity.level().addFreshEntity(projectile);
                 }
             }
             ((CoolAccess) entity).setCool(20);
-        } else if (!(((CoolAccess) entity).getCool() == 20) && ((SpecialBuffAccess) entity).getSBuff() && entity instanceof LivingEntity livingEntity && !livingEntity.level().isClientSide() && entity.getOffhandItem().is(TheRiseOfHostileItemTag.IS_THROWABLE)) {
+        } else if (((CoolAccess) entity).getCool() != 0 && ((SpecialBuffAccess) entity).getSBuff() && entity instanceof LivingEntity livingEntity && !livingEntity.level().isClientSide() && entity.getOffhandItem().is(TheRiseOfHostileItemTag.IS_THROWABLE)) {
             ((CoolAccess) entity).setCool(((CoolAccess) entity).getCool() - 1);
         }
     }

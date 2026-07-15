@@ -1,5 +1,6 @@
 package com.strongmonster.procedure;
 
+import com.strongmonster.access.SpecialBuffAccess;
 import com.strongmonster.datagen.tag.TheRiseOfHostileEntityTag;
 import com.strongmonster.access.BuffAccess;
 import net.fabricmc.fabric.api.entity.event.v1.ServerEntityCombatEvents;

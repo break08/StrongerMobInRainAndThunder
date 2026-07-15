@@ -1,0 +1,11 @@
+{
+  "effect.the_rise_of_hostile.curse_of_undead": "Curse Of Undead",
+  "gamerule.the_rise_of_hostile.all_diamond_gear_drop": "Entity with Diamond gear will drop their Diamond stuff, suggest to turn this off if you don't want an OP game",
+  "gamerule.the_rise_of_hostile.allow_sleep": "Allow player to sleep at night or not",
+  "gamerule.the_rise_of_hostile.bonus_drop": "Stronger Entity will drop bonus item when be killed by player",
+  "item.the_rise_of_hostile.dynamite_roll": "Dynamite Roll",
+  "the_rise_of_hostile.all_diamond_gear_drop": "Drop Diamond Gear",
+  "the_rise_of_hostile.allow_sleep": "Allow Sleep",
+  "the_rise_of_hostile.bonus_drop": "Bonus Drop",
+  "title.the_rise_of_hostile.setting": "The Rise Of Hostile Config"
+}

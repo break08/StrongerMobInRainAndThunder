@@ -19,7 +19,7 @@ public class ZombieParticle {
         Zombie zombie = (Zombie)(Object)this;
         Level world = zombie.level();
         if (((SpecialBuffAccess) zombie).getSBuff() && TheRiseOfHostileConfig.get().show_particle && world.getGameTime() % 10 == 0){
-            if (zombie.getItemBySlot(EquipmentSlot.BODY).is(TheRiseOfHostileItem.DYNAMITE_ROLL)){
+            if (zombie.getItemBySlot(EquipmentSlot.CHEST).is(TheRiseOfHostileItem.DYNAMITE_ROLL)){
                 for (int i = 0; i < 7; i++){
                     world.addParticle(
                             TheRiseOfHostile.EXPLODE_ZOMBIE,

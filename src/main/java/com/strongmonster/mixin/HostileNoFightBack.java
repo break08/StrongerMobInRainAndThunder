@@ -1,13 +1,11 @@
 package com.strongmonster.mixin;
 
 import com.strongmonster.datagen.tag.TheRiseOfHostileEntityTag;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.goal.target.TargetGoal;
 import net.minecraft.world.entity.ai.targeting.TargetingConditions;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.gamerules.GameRules;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;

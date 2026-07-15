@@ -1,0 +1,4 @@
+// 1.21.11	-999999999-01-01T00:00:00	The Rise of Hostile/Tags for minecraft:item
+28b8425eebf8d4af3a864b807d0cc85eb54f02ec data/the_rise_of_hostile/tags/item/give_target_effect.json
+fecf6408b43e6d6501aae94cb14305c54ec65d66 data/the_rise_of_hostile/tags/item/is_helmet.json
+6007a7b5d57c0ea79e40d6fd88b801bbb8ba875f data/the_rise_of_hostile/tags/item/is_throwable.json
