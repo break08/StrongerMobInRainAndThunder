@@ -40,7 +40,7 @@ public class ArmorEquipInRainWeather {
                     if (for_head) {
                         if (Math.random() < 0.25) {
                             helmet = new ItemStack(Items.NETHERITE_HELMET);
-                            helmet_drop = -1.0f;
+                            helmet_drop = 0f;
                         } else {
                             helmet = new ItemStack(Items.DIAMOND_HELMET);
                         }
@@ -51,8 +51,8 @@ public class ArmorEquipInRainWeather {
                                         .getOrThrow(Enchantments.PROTECTION),
                                 Mth.nextInt(
                                         entity.level().random,
-                                        3,
-                                        4
+                                        2,
+                                        3
                                 )
                         );
                     }
@@ -61,7 +61,7 @@ public class ArmorEquipInRainWeather {
                     if (for_chest) {
                         if (Math.random() < 0.25) {
                             chest = new ItemStack(Items.NETHERITE_CHESTPLATE);
-                            chest_drop = -1.0f;
+                            chest_drop = 0f;
                         } else {
                             chest = new ItemStack(Items.DIAMOND_CHESTPLATE);
                         }
@@ -73,8 +73,8 @@ public class ArmorEquipInRainWeather {
 
                                 Mth.nextInt(
                                         entity.level().random,
-                                        3,
-                                        4
+                                        2,
+                                        3
                                 )
                         );
                     }
@@ -83,7 +83,7 @@ public class ArmorEquipInRainWeather {
                     if (for_leg) {
                         if (Math.random() < 0.25) {
                             leg = new ItemStack(Items.NETHERITE_LEGGINGS);
-                            leg_drop = -1.0f;
+                            leg_drop = 0f;
                         } else {
                             leg = new ItemStack(Items.DIAMOND_LEGGINGS);
                         }
@@ -94,8 +94,8 @@ public class ArmorEquipInRainWeather {
                                         .getOrThrow(Enchantments.PROTECTION),
                                 Mth.nextInt(
                                         entity.level().random,
-                                        3,
-                                        4
+                                        2,
+                                        3
                                 )
                         );
                     }
@@ -104,7 +104,7 @@ public class ArmorEquipInRainWeather {
                     if (for_boot) {
                         if (Math.random() < 0.25) {
                             boot = new ItemStack(Items.NETHERITE_BOOTS);
-                            boot_drop = -1.0f;
+                            boot_drop = 0f;
                         } else {
                             boot = new ItemStack(Items.DIAMOND_BOOTS);
                         }
@@ -115,17 +115,17 @@ public class ArmorEquipInRainWeather {
                                         .getOrThrow(Enchantments.PROTECTION),
                                 Mth.nextInt(
                                         entity.level().random,
-                                        3,
-                                        4
+                                        2,
+                                        3
                                 )
                         );
                     }
 
                     if (!allDrop) {
-                        helmet_drop = -1.0f;
-                        chest_drop = -1.0f;
-                        leg_drop = -1.0f;
-                        boot_drop = -1.0f;
+                        helmet_drop = 0f;
+                        chest_drop = 0f;
+                        leg_drop = 0f;
+                        boot_drop = 0f;
                     }
 
                 } else {
@@ -134,13 +134,13 @@ public class ArmorEquipInRainWeather {
                         if (Math.random() < 0.35) {
                             helmet = new ItemStack(Items.DIAMOND_HELMET);
                             if (!allDrop) {
-                                helmet_drop = -1.0f;
+                                helmet_drop = 0f;
                             }
                         } else if (Math.random() < 0.85) {
                             helmet = new ItemStack(Items.IRON_HELMET);
                         } else {
                             helmet = new ItemStack(Items.NETHERITE_HELMET);
-                            helmet_drop = -1.0f;
+                            helmet_drop = 0f;
                         }
 
                         helmet.enchant(
@@ -160,13 +160,13 @@ public class ArmorEquipInRainWeather {
                         if (Math.random() < 0.35) {
                             chest = new ItemStack(Items.DIAMOND_CHESTPLATE);
                             if (!allDrop) {
-                                chest_drop = -1.0f;
+                                chest_drop = 0f;
                             }
                         } else if (Math.random() < 0.85) {
                             chest = new ItemStack(Items.IRON_CHESTPLATE);
                         } else {
                             chest = new ItemStack(Items.NETHERITE_CHESTPLATE);
-                            chest_drop = -1.0f;
+                            chest_drop = 0f;
                         }
 
                         chest.enchant(
@@ -175,8 +175,8 @@ public class ArmorEquipInRainWeather {
                                         .getOrThrow(Enchantments.PROTECTION),
                                 Mth.nextInt(
                                         entity.level().random,
-                                        2,
-                                        3
+                                        1,
+                                        2
                                 )
                         );
                     }
@@ -186,13 +186,13 @@ public class ArmorEquipInRainWeather {
                         if (Math.random() < 0.35) {
                             leg = new ItemStack(Items.DIAMOND_LEGGINGS);
                             if (!allDrop) {
-                                leg_drop = -1.0f;
+                                leg_drop = 0f;
                             }
                         } else if (Math.random() < 0.85) {
                             leg = new ItemStack(Items.IRON_LEGGINGS);
                         } else {
                             leg = new ItemStack(Items.NETHERITE_LEGGINGS);
-                            leg_drop = -1.0f;
+                            leg_drop = 0f;
                         }
                         leg.enchant(
                                 entity.level().registryAccess()
@@ -200,8 +200,8 @@ public class ArmorEquipInRainWeather {
                                         .getOrThrow(Enchantments.PROTECTION),
                                 Mth.nextInt(
                                         entity.level().random,
-                                        2,
-                                        3
+                                        1,
+                                        2
                                 )
                         );
                     }
@@ -211,13 +211,13 @@ public class ArmorEquipInRainWeather {
                         if (Math.random() < 0.35) {
                             boot = new ItemStack(Items.DIAMOND_BOOTS);
                             if (!allDrop) {
-                                boot_drop = -1.0f;
+                                boot_drop = 0f;
                             }
                         } else if (Math.random() < 0.85) {
                             boot = new ItemStack(Items.IRON_BOOTS);
                         } else {
                             boot = new ItemStack(Items.NETHERITE_BOOTS);
-                            boot_drop = -1.0f;
+                            boot_drop = 0f;
                         }
 
                         boot.enchant(
@@ -226,8 +226,8 @@ public class ArmorEquipInRainWeather {
                                         .getOrThrow(Enchantments.PROTECTION),
                                 Mth.nextInt(
                                         entity.level().random,
-                                        2,
-                                        3
+                                        1,
+                                        2
                                 )
                         );
                     }

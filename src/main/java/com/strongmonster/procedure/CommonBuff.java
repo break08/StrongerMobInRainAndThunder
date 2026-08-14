@@ -33,64 +33,66 @@ public class CommonBuff {
             if (Math.random() < 0.78) {
                 ((BuffAccess) entity).setBuff(true);
                 if (entity.getType().is(TheRiseOfHostileEntityTag.ZOMBIE_BUFF)) {
-                    if (Math.random() < 0.8) {
-                        if (Math.random() < 0.85) {
-                            if (Math.random() < 0.65) {
-                                main_hand = new ItemStack(Items.IRON_SWORD);
+                    if (Math.random() < 0.4) {
+                        if (Math.random() < 0.8) {
+                            if (Math.random() < 0.9) {
+                                if (Math.random() < 0.65) {
+                                    main_hand = new ItemStack(Items.IRON_SWORD);
+                                } else {
+                                    main_hand = new ItemStack(Items.IRON_AXE);
+                                }
                             } else {
-                                main_hand = new ItemStack(Items.IRON_AXE);
+                                main_hand = new ItemStack(Items.IRON_SPEAR);
+                            }
+                        } else if (Math.random() < 0.7) {
+                            if (Math.random() < 0.85) {
+                                if (Math.random() < 0.65) {
+                                    main_hand = new ItemStack(Items.DIAMOND_SWORD);
+                                } else {
+                                    main_hand = new ItemStack(Items.DIAMOND_AXE);
+                                }
+                            } else {
+                                main_hand = new ItemStack(Items.DIAMOND_SPEAR);
+                            }
+                            if (!allDrop) {
+                                mainhand_drop = 0f;
                             }
                         } else {
-                            main_hand = new ItemStack(Items.IRON_SPEAR);
-                        }
-                    } else if (Math.random() < 0.7) {
-                        if (Math.random() < 0.85) {
-                            if (Math.random() < 0.65) {
-                                main_hand = new ItemStack(Items.DIAMOND_SWORD);
+                            if (Math.random() < 0.85) {
+                                if (Math.random() < 0.65) {
+                                    main_hand = new ItemStack(Items.NETHERITE_SWORD);
+                                } else {
+                                    main_hand = new ItemStack(Items.NETHERITE_AXE);
+                                }
                             } else {
-                                main_hand = new ItemStack(Items.DIAMOND_AXE);
+                                main_hand = new ItemStack(Items.NETHERITE_SPEAR);
                             }
-                        } else {
-                            main_hand = new ItemStack(Items.DIAMOND_SPEAR);
+                            mainhand_drop = 0f;
                         }
-                        if (!allDrop) {
-                            mainhand_drop = -1.0f;
-                        }
-                    } else {
-                        if (Math.random() < 0.85) {
-                            if (Math.random() < 0.65) {
-                                main_hand = new ItemStack(Items.NETHERITE_SWORD);
-                            } else {
-                                main_hand = new ItemStack(Items.NETHERITE_AXE);
-                            }
-                        } else {
-                            main_hand = new ItemStack(Items.NETHERITE_SPEAR);
-                        }
-                        mainhand_drop = -1.0f;
-                    }
 
-                    main_hand.enchant(
-                            level.registryAccess()
-                                    .lookupOrThrow(Registries.ENCHANTMENT)
-                                    .getOrThrow(Enchantments.SHARPNESS),
-                            Mth.nextInt(
-                                    level.random,
-                                    1,
-                                    5
-                            )
-                    );
-
-                    if (Math.random() < 0.5){
                         main_hand.enchant(
                                 level.registryAccess()
                                         .lookupOrThrow(Registries.ENCHANTMENT)
-                                        .getOrThrow(Enchantments.FIRE_ASPECT),
+                                        .getOrThrow(Enchantments.SHARPNESS),
                                 Mth.nextInt(
                                         level.random,
                                         1,
                                         2
                                 )
                         );
+
+                        if (Math.random() < 0.1) {
+                            main_hand.enchant(
+                                    level.registryAccess()
+                                            .lookupOrThrow(Registries.ENCHANTMENT)
+                                            .getOrThrow(Enchantments.FIRE_ASPECT),
+                                    Mth.nextInt(
+                                            level.random,
+                                            1,
+                                            2
+                                    )
+                            );
+                        }
                     }
 
                 } else if (entity.getType().is(TheRiseOfHostileEntityTag.SKELETON_BUFF)) {
@@ -102,7 +104,7 @@ public class CommonBuff {
                             Mth.nextInt(
                                     level.random,
                                     1,
-                                    3
+                                    2
                             )
                     );
 
@@ -113,10 +115,10 @@ public class CommonBuff {
                             Mth.nextInt(
                                     level.random,
                                     1,
-                                    4
+                                    3
                             )
                     );
-                    if (Math.random() < 0.5) {
+                    if (Math.random() < 0.1) {
                         main_hand.enchant(
                                 level.registryAccess()
                                         .lookupOrThrow(Registries.ENCHANTMENT)
@@ -126,7 +128,7 @@ public class CommonBuff {
                     }
                 } else if (entity instanceof Spider && !(entity instanceof CaveSpider)){
                     ((BuffAccess) entity).setBuff(true);
-                    if (Math.random() < 0.25){
+                    if (Math.random() < 0.1){
                         Vec3 pos = entity.position();
                         entity.discard();
                         CaveSpider caveSpider = EntityType.CAVE_SPIDER.create(level, EntitySpawnReason.NATURAL);
@@ -135,13 +137,13 @@ public class CommonBuff {
                             world.addFreshEntity(caveSpider);
                         }
                     } else {
-                        if (Math.random() < 0.25) {
+                        if (Math.random() < 0.15) {
                             livingEntity.addEffect(new MobEffectInstance(MobEffects.INVISIBILITY, 1728000, 0));
                         }
                     }
                 } else if (entity instanceof CaveSpider){
                     ((BuffAccess) entity).setBuff(true);
-                    if (Math.random() < 0.12){
+                    if (Math.random() < 0.09){
                         livingEntity.addEffect(new MobEffectInstance(MobEffects.INVISIBILITY, 1728000, 0));
                     }
                 }

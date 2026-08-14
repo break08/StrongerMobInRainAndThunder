@@ -1,6 +1,7 @@
 // 1.21.11	-999999999-01-01T00:00:00	The Rise of Hostile/Tags for minecraft:entity_type
 1bc98fc9f21b2b3e6677776ce54c0679d3b32d02 data/the_rise_of_hostile/tags/entity_type/armor_buff.json
-463acbda66bbbd3b3a7f76d1daa6cd0a93070944 data/the_rise_of_hostile/tags/entity_type/hostile_all.json
+a449eefcc55e5349f9764885531ed7cd8560c3ba data/the_rise_of_hostile/tags/entity_type/hostile_all.json
+859d0f5979c6140f2d048406a97270998ececa96 data/the_rise_of_hostile/tags/entity_type/illager_all.json
 5d869f60949c8a18c49f9cc903670c07c539f5a2 data/the_rise_of_hostile/tags/entity_type/is_golem.json
 a062d28dfb3652091f8b38d19f28a59754d99b7f data/the_rise_of_hostile/tags/entity_type/skeleton_buff.json
 beb10cf235ca78237600dfd14978ee0b2908d721 data/the_rise_of_hostile/tags/entity_type/zombie_buff.json

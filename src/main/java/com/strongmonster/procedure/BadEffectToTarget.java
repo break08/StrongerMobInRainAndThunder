@@ -14,17 +14,17 @@ public class BadEffectToTarget {
                 (entity, source, healthAmount, shieldBlocked, a) -> {
                     Entity attacker = source.getEntity();
                     if (!(attacker == null)) {
-                        if (((SpecialBuffAccess) entity).getSBuff()
+                        if (((SpecialBuffAccess) attacker).getSBuff()
                                 && !entity.level().isClientSide()
                                 && attacker instanceof LivingEntity livingAttacker
                                 && !(livingAttacker.getOffhandItem().isEmpty())
                         ) {
                             if (livingAttacker.getOffhandItem().is(Items.IRON_SHOVEL)) {
-                                entity.addEffect(new MobEffectInstance(MobEffects.MINING_FATIGUE, 12000, 4));
+                                entity.addEffect(new MobEffectInstance(MobEffects.MINING_FATIGUE, 12000, 0));
                             } else if (livingAttacker.getOffhandItem().is(Items.SPIDER_EYE)){
-                                entity.addEffect(new MobEffectInstance(MobEffects.POISON, 12000, 1));
+                                entity.addEffect(new MobEffectInstance(MobEffects.POISON, 12000, 0));
                             } else if (livingAttacker.getOffhandItem().is(Items.COBWEB)) {
-                                entity.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 12000, 2));
+                                entity.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 12000, 0));
                             }
                         }
                     }

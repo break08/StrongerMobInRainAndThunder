@@ -14,6 +14,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionResult;
@@ -26,6 +27,7 @@ import net.minecraft.world.entity.monster.illager.Vindicator;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.gamerules.GameRule;
 import net.minecraft.world.level.gamerules.GameRuleCategory;
@@ -59,7 +61,16 @@ public class TheRiseOfHostileGameRule implements ModInitializer {
             if (world instanceof ServerLevel serverLevel) {
                 boolean AllowSleepDisabled = serverLevel.getGameRules().get(TheRiseOfHostileGameRule.ALLOW_SLEEP_GAMERULE);
                 BlockPos pos = hitResult.getBlockPos();
-                if (!AllowSleepDisabled){
+                if (!AllowSleepDisabled && world.getBlockState(pos).is(BlockTags.BEDS)){
+                    Block bedDrop = world.getBlockState(pos).getBlock();
+                    ItemEntity bedToSpawn = new ItemEntity(
+                            serverLevel,
+                            pos.getX(),
+                            pos.getY(),
+                            pos.getZ(),
+                            new ItemStack(bedDrop.asItem())
+                    );
+                    serverLevel.addFreshEntity(bedToSpawn);
                     serverLevel.setBlock(pos, Blocks.AIR.defaultBlockState(), 3);
                     if (player instanceof ServerPlayer _serverPlayer) {
                         LevelData.RespawnData respawnData =
@@ -99,98 +110,144 @@ public class TheRiseOfHostileGameRule implements ModInitializer {
                     BlockPos entityRipPos = killedEntity.blockPosition();
 
                     // NBT Check
-                    boolean isBuff = ((BuffAccess) killedEntity).getBuff();
-                    boolean isSpecialBuff = ((SpecialBuffAccess) killedEntity).getSBuff();
+                    if (killedEntity instanceof BuffAccess || killedEntity instanceof SpecialBuffAccess){
+                        boolean isBuff = ((BuffAccess) killedEntity).getBuff();
+                        boolean isSpecialBuff = ((SpecialBuffAccess) killedEntity).getSBuff();
 
-                    if (
-                            entity instanceof Player
-                                    && (isBuff || isSpecialBuff)
-                                    && bonusDrop
-                    ) {
+                        if (!(entity instanceof BuffAccess)){
+                            isBuff = false;
+                        } else if (!(entity instanceof SpecialBuffAccess)){
+                            isSpecialBuff = false;
+                        }
 
-                        if (killedEntity instanceof Vindicator) {
+                        if (
+                                entity instanceof Player
+                                        && (isBuff || isSpecialBuff)
+                                        && bonusDrop
+                                        && !(killedEntity instanceof Player)
+                        ) {
 
-                            for (
-                                    int index0 = 0;
-                                    index0 < Mth.nextInt(RandomSource.create(), 3, 7);
-                                    index0++
-                            ) {
+                            if (killedEntity instanceof Vindicator) {
+
+                                for (
+                                        int index0 = 0;
+                                        index0 < Mth.nextInt(RandomSource.create(), 3, 7);
+                                        index0++
+                                ) {
+
+                                    if (world instanceof ServerLevel _level) {
+                                        ItemEntity entityToSpawn_5 = new ItemEntity(
+                                                _level,
+                                                entityRipPos.getX(),
+                                                entityRipPos.getY(),
+                                                entityRipPos.getZ(),
+                                                new ItemStack(Items.EMERALD)
+                                        );
+
+                                        entityToSpawn_5.setPickUpDelay(1);
+                                        _level.addFreshEntity(entityToSpawn_5);
+                                    }
+                                }
+
+                            } else if (killedEntity instanceof Pillager) {
 
                                 if (world instanceof ServerLevel _level) {
-                                    ItemEntity entityToSpawn_5 = new ItemEntity(
+                                    ItemEntity entityToSpawn_7 = new ItemEntity(
                                             _level,
                                             entityRipPos.getX(),
                                             entityRipPos.getY(),
                                             entityRipPos.getZ(),
-                                            new ItemStack(Items.EMERALD)
+                                            new ItemStack(Items.CROSSBOW)
                                     );
 
-                                    entityToSpawn_5.setPickUpDelay(1);
-                                    _level.addFreshEntity(entityToSpawn_5);
+                                    entityToSpawn_7.setPickUpDelay(1);
+                                    _level.addFreshEntity(entityToSpawn_7);
                                 }
-                            }
 
-                        } else if (killedEntity instanceof Pillager) {
+                                for (
+                                        int index1 = 0;
+                                        index1 < Mth.nextInt(RandomSource.create(), 3, 10);
+                                        index1++
+                                ) {
 
-                            if (world instanceof ServerLevel _level) {
-                                ItemEntity entityToSpawn_7 = new ItemEntity(
-                                        _level,
-                                        entityRipPos.getX(),
-                                        entityRipPos.getY(),
-                                        entityRipPos.getZ(),
-                                        new ItemStack(Items.CROSSBOW)
-                                );
+                                    if (world instanceof ServerLevel _level) {
+                                        ItemEntity entityToSpawn_9 = new ItemEntity(
+                                                _level,
+                                                entityRipPos.getX(),
+                                                entityRipPos.getY(),
+                                                entityRipPos.getZ(),
+                                                new ItemStack(Items.ARROW)
+                                        );
 
-                                entityToSpawn_7.setPickUpDelay(1);
-                                _level.addFreshEntity(entityToSpawn_7);
-                            }
+                                        entityToSpawn_9.setPickUpDelay(1);
+                                        _level.addFreshEntity(entityToSpawn_9);
+                                    }
+                                }
 
-                            for (
-                                    int index1 = 0;
-                                    index1 < Mth.nextInt(RandomSource.create(), 3, 10);
-                                    index1++
-                            ) {
+                            } else if (killedEntity.getType().is(TheRiseOfHostileEntityTag.ZOMBIE_BUFF)) {
+
+                                for (
+                                        int index2 = 0;
+                                        index2 < Mth.nextInt(RandomSource.create(), 2, 4);
+                                        index2++
+                                ) {
+
+                                    if (world instanceof ServerLevel _level) {
+                                        ItemEntity entityToSpawn_12 = new ItemEntity(
+                                                _level,
+                                                entityRipPos.getX(),
+                                                entityRipPos.getY(),
+                                                entityRipPos.getZ(),
+                                                new ItemStack(Items.IRON_INGOT)
+                                        );
+
+                                        entityToSpawn_12.setPickUpDelay(1);
+                                        _level.addFreshEntity(entityToSpawn_12);
+                                    }
+                                }
+
+                                if (Math.random() < 0.1) {
+
+                                    if (world instanceof ServerLevel _level) {
+                                        ItemEntity entityToSpawn_13 = new ItemEntity(
+                                                _level,
+                                                entityRipPos.getX(),
+                                                entityRipPos.getY(),
+                                                entityRipPos.getZ(),
+                                                new ItemStack(Items.TOTEM_OF_UNDYING)
+                                        );
+
+                                        entityToSpawn_13.setPickUpDelay(1);
+                                        _level.addFreshEntity(entityToSpawn_13);
+                                    }
+                                }
+
+                            } else if (killedEntity instanceof Creeper) {
+
+                                for (
+                                        int index3 = 0;
+                                        index3 < Mth.nextInt(RandomSource.create(), 3, 6);
+                                        index3++
+                                ) {
+
+                                    if (world instanceof ServerLevel _level) {
+                                        ItemEntity entityToSpawn_16 = new ItemEntity(
+                                                _level,
+                                                entityRipPos.getX(),
+                                                entityRipPos.getY(),
+                                                entityRipPos.getZ(),
+                                                new ItemStack(Items.GUNPOWDER)
+                                        );
+
+                                        entityToSpawn_16.setPickUpDelay(1);
+                                        _level.addFreshEntity(entityToSpawn_16);
+                                    }
+                                }
+
+                            } else if (killedEntity instanceof Evoker) {
 
                                 if (world instanceof ServerLevel _level) {
-                                    ItemEntity entityToSpawn_9 = new ItemEntity(
-                                            _level,
-                                            entityRipPos.getX(),
-                                            entityRipPos.getY(),
-                                            entityRipPos.getZ(),
-                                            new ItemStack(Items.ARROW)
-                                    );
-
-                                    entityToSpawn_9.setPickUpDelay(1);
-                                    _level.addFreshEntity(entityToSpawn_9);
-                                }
-                            }
-
-                        } else if (killedEntity.getType().is(TheRiseOfHostileEntityTag.ZOMBIE_BUFF)) {
-
-                            for (
-                                    int index2 = 0;
-                                    index2 < Mth.nextInt(RandomSource.create(), 2, 4);
-                                    index2++
-                            ) {
-
-                                if (world instanceof ServerLevel _level) {
-                                    ItemEntity entityToSpawn_12 = new ItemEntity(
-                                            _level,
-                                            entityRipPos.getX(),
-                                            entityRipPos.getY(),
-                                            entityRipPos.getZ(),
-                                            new ItemStack(Items.IRON_INGOT)
-                                    );
-
-                                    entityToSpawn_12.setPickUpDelay(1);
-                                    _level.addFreshEntity(entityToSpawn_12);
-                                }
-                            }
-
-                            if (Math.random() < 0.1) {
-
-                                if (world instanceof ServerLevel _level) {
-                                    ItemEntity entityToSpawn_13 = new ItemEntity(
+                                    ItemEntity entityToSpawn_18 = new ItemEntity(
                                             _level,
                                             entityRipPos.getX(),
                                             entityRipPos.getY(),
@@ -198,52 +255,16 @@ public class TheRiseOfHostileGameRule implements ModInitializer {
                                             new ItemStack(Items.TOTEM_OF_UNDYING)
                                     );
 
-                                    entityToSpawn_13.setPickUpDelay(1);
-                                    _level.addFreshEntity(entityToSpawn_13);
+                                    entityToSpawn_18.setPickUpDelay(1);
+                                    _level.addFreshEntity(entityToSpawn_18);
                                 }
                             }
 
-                        } else if (killedEntity instanceof Creeper) {
-
-                            for (
-                                    int index3 = 0;
-                                    index3 < Mth.nextInt(RandomSource.create(), 3, 6);
-                                    index3++
-                            ) {
-
-                                if (world instanceof ServerLevel _level) {
-                                    ItemEntity entityToSpawn_16 = new ItemEntity(
-                                            _level,
-                                            entityRipPos.getX(),
-                                            entityRipPos.getY(),
-                                            entityRipPos.getZ(),
-                                            new ItemStack(Items.GUNPOWDER)
-                                    );
-
-                                    entityToSpawn_16.setPickUpDelay(1);
-                                    _level.addFreshEntity(entityToSpawn_16);
-                                }
+                            if (world instanceof ServerLevel serverLevel && bonusExp) {
+                                ExperienceOrb experienceOrb = new ExperienceOrb(killedEntity.level(), killedEntity.position(), Vec3.ZERO, 10);
+                                serverLevel.addFreshEntity(experienceOrb);
                             }
-
-                        } else if (killedEntity instanceof Evoker) {
-
-                            if (world instanceof ServerLevel _level) {
-                                ItemEntity entityToSpawn_18 = new ItemEntity(
-                                        _level,
-                                        entityRipPos.getX(),
-                                        entityRipPos.getY(),
-                                        entityRipPos.getZ(),
-                                        new ItemStack(Items.TOTEM_OF_UNDYING)
-                                );
-
-                                entityToSpawn_18.setPickUpDelay(1);
-                                _level.addFreshEntity(entityToSpawn_18);
                             }
-                        }
-                        if (world instanceof ServerLevel serverLevel && bonusExp) {
-                            ExperienceOrb experienceOrb = new ExperienceOrb(killedEntity.level(), killedEntity.position(), Vec3.ZERO, 10);
-                            serverLevel.addFreshEntity(experienceOrb);
-                        }
                     }
                 }
         );

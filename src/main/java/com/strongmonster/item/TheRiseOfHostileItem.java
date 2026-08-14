@@ -4,7 +4,6 @@ import com.strongmonster.TheRiseOfHostile;
 
 // Armor Material
 import com.strongmonster.item.armor.DynamiteRoll;
-import com.strongmonster.item.armor.EffectCurseHat;
 
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -22,12 +21,6 @@ public class TheRiseOfHostileItem {
             Item::new,
             new Item.Properties().humanoidArmor(DynamiteRoll.INSTANCE, ArmorType.CHESTPLATE)
                     .durability(ArmorType.CHESTPLATE.getDurability(DynamiteRoll.BASE_DURABILITY))
-    );
-
-    public static final Item EFFECT_CURSE_HAT = register("effect_curse_hat",
-            Item::new,
-            new Item.Properties().humanoidArmor(EffectCurseHat.INSTANCE, ArmorType.HELMET)
-                    .durability(ArmorType.HELMET.getDurability(EffectCurseHat.BASE_DURABILITY))
     );
 
     public static void initialize(){}

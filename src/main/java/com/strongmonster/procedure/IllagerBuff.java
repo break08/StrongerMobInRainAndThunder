@@ -33,8 +33,9 @@ public class IllagerBuff {
 
         ItemStack main_hand = ItemStack.EMPTY;
         if (entity instanceof LivingEntity living_entity) {
-            if (living_entity instanceof Pillager && !(living_entity.getMainHandItem().isEmpty())) {
+            if (living_entity instanceof Pillager && living_entity.getMainHandItem().is(Items.CROSSBOW)) {
                 ((BuffAccess) entity).setBuff(true);
+                main_hand = new ItemStack(Items.CROSSBOW);
                 if (isRain) {
                     living_entity.getMainHandItem().enchant(
                             level.registryAccess()
@@ -64,7 +65,7 @@ public class IllagerBuff {
                             2
                     );
 
-                    mainhand_drop = -1.0f;
+                    mainhand_drop = 0f;
                 } else {
                     living_entity.getMainHandItem().enchant(
                             level.registryAccess()
@@ -107,7 +108,7 @@ public class IllagerBuff {
                                 level.registryAccess()
                                         .lookupOrThrow(Registries.ENCHANTMENT)
                                         .getOrThrow(Enchantments.SHARPNESS),
-                                4
+                                3
                         );
                     } else {
                         main_hand = new ItemStack(Items.DIAMOND_AXE);
@@ -118,8 +119,7 @@ public class IllagerBuff {
                                 2
                         );
                     }
-                    living_entity.setItemInHand(InteractionHand.MAIN_HAND, main_hand.copy());
-                    mainhand_drop = -1.0f;
+                    mainhand_drop = 0f;
                 } else {
                     ((SpecialBuffAccess) entity).setSBuff(true);
                 }
@@ -127,21 +127,21 @@ public class IllagerBuff {
                 if (isRain) {
                     if (Math.random() < 0.15) {
                         main_hand = new ItemStack(Items.NETHERITE_SWORD);
-                        mainhand_drop = -1.0f;
+                        mainhand_drop = 0f;
                     } else {
                         main_hand = new ItemStack(Items.DIAMOND_SWORD);
-                        if (!allDrop) {mainhand_drop = -1.0f;}
+                        if (!allDrop) {mainhand_drop = 0f;}
                     }
                 } else {
                     main_hand = new ItemStack(Items.DIAMOND_SWORD);
-                    if (!allDrop) {mainhand_drop = -1.0f;}
+                    if (!allDrop) {mainhand_drop = 0f;}
                 }
             } else if (living_entity instanceof Evoker) {
                 ((BuffAccess) entity).setBuff(true);
             }
             EffectBuff.run(entity);
             SpecialBuff.run(entity);
-            if (entity instanceof LivingEntity livingEntity){
+            if (entity instanceof LivingEntity livingEntity && !(entity instanceof Pillager)){
                 livingEntity.setItemSlot(EquipmentSlot.MAINHAND, main_hand);
             }
             if (entity instanceof Mob mob){

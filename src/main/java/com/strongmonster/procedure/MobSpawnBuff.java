@@ -77,7 +77,7 @@ public class MobSpawnBuff {
 
                         if ((main_hand.is(Items.NETHERITE_SWORD) || main_hand.is(Items.NETHERITE_AXE) || main_hand.is(Items.NETHERITE_SPEAR))
                                 || (!allDrop && (main_hand.is(Items.DIAMOND_SWORD) || main_hand.is(Items.DIAMOND_AXE) || main_hand.is(Items.DIAMOND_SPEAR)))) {
-                            mainhand_drop = -1.0f;
+                            mainhand_drop = 0f;
                         }
 
                         main_hand.enchant(
@@ -103,55 +103,44 @@ public class MobSpawnBuff {
                             entity.level().addFreshEntity(killer_bunny);
                         }
                     } else {
-                        if (value == 1 || value == 2 || value == 3) {
-                            if (Math.random() < 0.75) {
-                                main_hand = new ItemStack(Items.IRON_SWORD);
-                            } else {
-                                main_hand = new ItemStack(Items.DIAMOND_SWORD);
+                        if (Math.random() < 0.5) {
+                            if (value == 1 || value == 2 || value == 3) {
+                                if (Math.random() < 0.75) {
+                                    main_hand = new ItemStack(Items.IRON_SWORD);
+                                } else {
+                                    main_hand = new ItemStack(Items.DIAMOND_SWORD);
+                                }
+                            } else if (value == 4 || value == 5) {
+                                if (Math.random() < 0.75) {
+                                    main_hand = new ItemStack(Items.IRON_AXE);
+                                } else {
+                                    main_hand = new ItemStack(Items.DIAMOND_AXE);
+                                }
+                            } else if (value == 6) {
+                                if (Math.random() < 0.75) {
+                                    main_hand = new ItemStack(Items.IRON_SPEAR);
+                                } else {
+                                    main_hand = new ItemStack(Items.DIAMOND_SPEAR);
+                                }
                             }
-                        } else if (value == 4 || value == 5) {
-                            if (Math.random() < 0.75) {
-                                main_hand = new ItemStack(Items.IRON_AXE);
-                            } else {
-                                main_hand = new ItemStack(Items.DIAMOND_AXE);
+                            if (!allDrop && (main_hand.is(Items.DIAMOND_SWORD) || main_hand.is(Items.DIAMOND_AXE) || main_hand.is(Items.DIAMOND_SPEAR))) {
+                                mainhand_drop = 0f;
                             }
-                        } else if (value == 6) {
-                            if (Math.random() < 0.75) {
-                                main_hand = new ItemStack(Items.IRON_SPEAR);
-                            } else {
-                                main_hand = new ItemStack(Items.DIAMOND_SPEAR);
-                            }
-                        }
-                        if (!allDrop && (main_hand.is(Items.DIAMOND_SWORD) || main_hand.is(Items.DIAMOND_AXE) || main_hand.is(Items.DIAMOND_SPEAR))) {
-                            mainhand_drop = -1.0f;
-                        }
 
-                        main_hand.enchant(
-                                level.registryAccess()
-                                        .lookupOrThrow(Registries.ENCHANTMENT)
-                                        .getOrThrow(Enchantments.SHARPNESS),
-                                Mth.nextInt(
-                                        level.random,
-                                        3,
-                                        5
-                                )
-                        );
+                            main_hand.enchant(
+                                    level.registryAccess()
+                                            .lookupOrThrow(Registries.ENCHANTMENT)
+                                            .getOrThrow(Enchantments.SHARPNESS),
+                                    Mth.nextInt(
+                                            level.random,
+                                            2,
+                                            3
+                                    )
+                            );
 
-                        main_hand.enchant(
-                                level.registryAccess()
-                                        .lookupOrThrow(Registries.ENCHANTMENT)
-                                        .getOrThrow(Enchantments.FIRE_ASPECT),
-                                Mth.nextInt(
-                                        level.random,
-                                        1,
-                                        2
-                                )
-                        );
-                        livingEntity.setItemInHand(InteractionHand.MAIN_HAND, main_hand.copy());
-                        if (entity instanceof Player player) {
-                            player.getInventory().setChanged();
+                            livingEntity.setItemInHand(InteractionHand.MAIN_HAND, main_hand.copy());
                         }
-                    }
+                        }
                 } else {
                     ((SpecialBuffAccess) entity).setSBuff(true);
                     SpecialBuff.run(entity);
@@ -165,7 +154,7 @@ public class MobSpawnBuff {
                                 level.registryAccess()
                                         .lookupOrThrow(Registries.ENCHANTMENT)
                                         .getOrThrow(Enchantments.PUNCH),
-                                4
+                                3
                         );
 
                         main_hand.enchant(
@@ -175,14 +164,8 @@ public class MobSpawnBuff {
                                 5
                         );
 
-                        main_hand.enchant(
-                                level.registryAccess()
-                                        .lookupOrThrow(Registries.ENCHANTMENT)
-                                        .getOrThrow(Enchantments.FLAME),
-                                2
-                        );
 
-                        mainhand_drop = -1.0f;
+                        mainhand_drop = 0f;
 
                     } else {
                         ((BuffAccess) entity).setBuff(true);
@@ -192,8 +175,8 @@ public class MobSpawnBuff {
                                         .getOrThrow(Enchantments.PUNCH),
                                 Mth.nextInt(
                                         level.random,
-                                        2,
-                                        3
+                                        1,
+                                        2
                                 )
                         );
 
@@ -203,15 +186,9 @@ public class MobSpawnBuff {
                                         .getOrThrow(Enchantments.POWER),
                                 Mth.nextInt(
                                         level.random,
-                                        3,
-                                        4
+                                        2,
+                                        3
                                 )
-                        );
-                        main_hand.enchant(
-                                level.registryAccess()
-                                        .lookupOrThrow(Registries.ENCHANTMENT)
-                                        .getOrThrow(Enchantments.FLAME),
-                                1
                         );
                     }
                     livingEntity.setItemInHand(InteractionHand.MAIN_HAND, main_hand.copy());
